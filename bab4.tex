@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BAB 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+% TO DO: ML pipeline
+
+
+\mychapter{4}{BAB 4 PEMBUATAN MODEL}
+
+Arsitektur model LSTM yang digunakan dalam penelitian ini ditunjukkan oleh Gambar \ref{fig:arslstm}. Model terdiri dari tiga \textit{layer}, yakni satu buah LSTM \textit{layer} dan dua buah \textit{dense layer}. Terdapat dua varian model LSTM yang dilatih dengan menggunakan dua \textit{hyperparameter} berbeda. Model pertama memiliki 512 unit LSTM pada \textit{layer} pertama dan 256 unit \textit{dense} pada \textit{layer} kedua. Sementara itu, model kedua memiliki 256 unit LSTM pada layer pertama dan 128 unit \textit{dense} pada \textit{layer} kedua.
+
+% img arsi lstm
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=1, angle=-90]{img/lstm-Page-2.drawio.pdf}
+  \caption{Arsitektur LSTM}
+  \label{fig:arslstm}
+\end{figure}
+
+\textit{Bidirectional} LSTM atau Bi-LSTM merupakan pengembangan dari LSTM yang dapat dilatih dua arah secara bersamaan dengan \textit{hidden layer} yang terpisah \parencite{yuReviewRecurrentNeural2019}. Dengan menggabungkan LSTM dengan \textit{bidirectional} RNN, Bi-LSTM mampu mengatasi keterbatasan LSTM konvensional yang hanya dapat memanfaatkan informasi sebelumnya. Gambar \ref{fig:arsbilstm} menunjukkan arsitektur model Bi-LSTM yang digunakan dalam penelitian ini.
+
+% img arsi bi-lstm
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=1, angle=-90]{img/lstm-Page-3.drawio.pdf}
+  \caption{Arsitektur Bi-LSTM}
+  \label{fig:arsbilstm}
+\end{figure}
+
+LSTM-FCN atau LSTM-\textit{Fully Convolutional Network} merupakan model gabungan antara LSTM dengan  \textit{Fully Convolutional Network} (FCN) \parencite{karimLSTMFullyConvolutional2018}. Arsitektur model ini terdiri dari dua blok, yaitu blok \textit{convolutional} dan blok LSTM. Blok \textit{convolutional} terdiri dari tiga \textit{layer convolutional} 1 dimensi, sedangkan blok LSTM hanya terdiri dari satu layer LSTM. Pada versi original, untuk menghindari \textit{overfitting}, terdapat \textit{dimension shuffle} yang akan mengacak input sebelum blok LSTM. Akan tetapi, meletakkan \textit{dimension shuffle} sebelum blok LSTM akan menyebabkan hilangnya informasi pada dimensi waktu \parencite{8713870}. Pada penelitian ini kami melakukan modifikasi pada LSTM-FCN dengan menukar posisi \textit{dimension shuffle} pada sebelum blok \textit{convolutional}. Gambar \ref{fig:arslstmfcn} menunjukkan struktur model LSTM-FCN modifikasi yang digunakan pada penelitian.
+
+% img arsi lstm-fcn
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.7, angle=-90]{img/lstm-Page-4.drawio.pdf}
+  \caption{Arsitektur LSTM-FCN Modifikasi}
+  \label{fig:arslstmfcn}
+\end{figure}
+
+\section{Pelatihan Model}
+
+Seluruh model dilatih dengan menggunakan \textit{framework} TensorFlow. 
+Pelatihan dilakukan dengan menggunakan dataset yang telah dilakukan \textit{preprocessing} dan ekstraksi fitur sebelumnya.
+Pelatihan dilakukan sejumlah 50 \textit{epoch} dengan menggunakan ukuran \textit{batch} 256.
+Selama proses pelatihan, digunakan algoritma optimasi Adam dengan \textit{learning rate} 0.001.
+Model dilatih pada perangkat server DGX A100.
+
+\section{Evalusi Model}
+
+\begin{table}[ht]
+\caption{Evaluasi Model}
+\label{hasilLSTM}
+\begin{center}
+\begin{tabular}{cccccc}
+\hline
+\multicolumn{1}{c}{Fitur} 
+ & \multicolumn{1}{c}{Model}
+ & \\
+\hline
+ & & Akurasi & \emph{Precision} & \emph{Recall} & F1-\emph{score} \\
+\hline
+\multirow{3}{4em}{RRI} & LSTM 512 & 0.9679 & 0.9662  & 0.9679 &  0.9652 \tabularnewline
+& LSTM 256 & 0.9674 & 0.9656 &  0.9674 &  0.9645 \tabularnewline
+& Bi-LSTM & 0.9636 & 0.9617  & 0.9636 &  0.9606 \tabularnewline
+& LSTM-FCN & 0.9667 & 0.9643 &  0.9667  & 0.9643 \tabularnewline
+\hline
+\end{tabular}
+\end{center}
+\end{table}

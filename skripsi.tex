@@ -26,6 +26,8 @@
 % Needed to add ability to customize subcaption
 \usepackage{subcaption}
 
+\usepackage{multirow}
+\usepackage{mathtools}
 % Needed to force placing figure here
 \usepackage{float}
 \usepackage{csquotes}
@@ -125,15 +127,18 @@
 % -----------------------------------------------------------------
 \usepackage{fontspec} % use custom font
 
-\setmainfont[Path=/path/to/your/calibri/font/,
-    BoldItalicFont=calibriz.ttf,
-    BoldFont      =calibrib.ttf,
-    ItalicFont    =calibrii.ttf]{calibri.ttf} % use original calibri font
+\setmainfont{Calibri} % carlito is calibri replacement
+\setmonofont{Courier New} % courier new is courier replacement
 
-\setmonofont[Path=/path/to/your/courier/font/,
-    BoldItalicFont=courbi.ttf,
-    BoldFont      =courbd.ttf,
-    ItalicFont    =couri.ttf]{cour.ttf} % use original courir new font
+% \setmainfont[Path=/path/to/your/calibri/font/,
+%     BoldItalicFont=calibriz.ttf,
+%     BoldFont      =calibrib.ttf,
+%     ItalicFont    =calibrii.ttf]{calibri.ttf} % use original calibri font
+%
+% \setmonofont[Path=/path/to/your/courier/font/,
+%     BoldItalicFont=courbi.ttf,
+%     BoldFont      =courbd.ttf,
+%     ItalicFont    =couri.ttf]{cour.ttf} % use original courir new font
 
 % -----------------------------------------------------------------
 % Debungging configuration
@@ -163,26 +168,28 @@
 % Fill your data here
 % -----------------------------------------------------------------
 % title
-\titleskripsi{The Compendious Book on Calculation by Completion and Balancing}
+\titleskripsi{Prediksi Detak Jantung Berbasis LSTM pada Raspberry Pi untuk Pemantauan Kesehatan Portabel}
 % personal data
-\fullname{M. Ibn Musa al-Khwarizmi}
-\idnum{112233445566}
+\fullname{Ahmad Foresta Azhar Zen}
+\idnum{205150201111051}
 \approvaldate{N/A}
 \degree{N/A}
-\yearsubmit{2019}
+\yearsubmit{2024}
 \dept{TEKNIK INFORMATIKA}
 \faculty{FAKULTAS ILMU KOMPUTER}
 \university{universitas brawijaya}
 \city{malang}
 % supervisor data
-\firstsupervisor{Nama Dosen Pembimbing I, S.T., M.T., Ph.D}
-\firstsupervisornip{NIP: 1234 45679}
-\secondsupervisor{Nama Dosen Pembimbing II, S.T., M.T., Ph.D}
-\secondsupervisornip{NIP: 5555 7777}
+\firstsupervisor{Eko Sakti Pramukantoro, S.Kom., M.Kom., Ph.D.}
+\firstsupervisornip{NIK: 2011028608051001}
+\secondsupervisor{Kasyful Amron, S.T., M.Sc.}
+\secondsupervisornip{NIP: 197508032003121003}
 
 % -----------------------------------------------------------------
 % And so it begins
 % -----------------------------------------------------------------
+\emergencystretch=8em % prevent overfull hbox
+\hyphenpenalty=10000
 \begin{document}
 
 % -----------------------------------------------------------------
@@ -206,10 +213,10 @@
   pernah diajukan oleh orang lain untuk memperoleh gelar akademik di
   suatu perguruan tinggi, dan tidak terdapat karya atau pendapat yang
   pernah ditulis atau diterbitkan oleh orang lain, kecuali yang secara
-  tertulis disitasi dalam naskah ini dan disebutkan dalam daftar
+  tertulis di sitasi dalam naskah ini dan disebutkan dalam daftar
   referensi.
 
-  Apabila ternyata didalam naskah skripsi ini dapat dibuktikan
+  Apabila ternyata di dalam naskah skripsi ini dapat dibuktikan
   terdapat unsur-unsur plagiasi, saya bersedia skripsi ini digugurkan
   dan gelar akademik yang telah saya peroleh (sarjana) dibatalkan,
   serta diproses sesuai dengan peraturan perundang-undangan yang
@@ -217,10 +224,10 @@
   \vspace{1.5cm}
 
   \noindent
-  \hspace*{8cm}Malang, 2 Juli 2019   \vspace{2.5cm}   \\
-
-  \hspace*{7cm}\underline{M. Ibn Musa al-Khwarizmi} \\
-  \hspace*{8cm}NIM : 112233445566
+  \hspace*{9cm}Malang, 2 Juli 2019
+  \vspace{2.5cm}   \\
+  \hspace*{9cm}\underline{Ahmad Foresta Azhar Zen} \\
+  \hspace*{9cm}NIM : 205150201111051
 }
 
 %-----------------------------------------------------------------
@@ -229,9 +236,10 @@
 {\preface
 
   Puji syukur kehadirat Allah SWT yang telah melimpahkan rahmat,
-  taufik dan hidayah-Nya sehingga skirpsi yang berjudul ``The Compendious Book
-  on Calculation by Completion and Balancing'' ini dapat terselesaikan. Dengan
-  selesainya penulisan skirpsi ini, penulis ingin menyampaikan terima kasih
+  taufik dan hidayah-Nya sehingga skripsi yang berjudul 
+  "Prediksi Detak Jantung Berbasis LSTM pada Raspberry Pi untuk
+  Pemantauan Kesehatan Portabel" ini dapat terselesaikan. Dengan
+  selesainya penulisan skripsi ini, penulis ingin menyampaikan terima kasih
   kepada:
 
   \begin{singlespace}
@@ -249,7 +257,7 @@
       penulis dengan dengan semangat dan sabar sehingga penulis dapat
       menyelesaikan skripsi ini.}
   \item {Bapak Tri Astoto Kurniawan, S.T, M.T, Ph.D dan Bapak Agus
-      Wahyu Widodo, S.T, M.Cs selaku Ketua Jurusan Teknik Informatika
+      Wahyu Widodo, S.T, M.Cs selaku Ketua Departemen Teknik Informatika
       dan Kepala Program Studi Teknik Informatika Fakultas Ilmu
       Komputer, Universitas Brawijaya.}
   \item{Seluruh pengembang kakas bantu perangkat lunak bebas yang
@@ -268,10 +276,10 @@
   \vspace{0.8cm}
 
   \noindent
-  \hspace*{8cm}Malang, 2 Juli 2019  \vspace{1.5cm} \\
-
-  \hspace*{6.8cm}Penulis \\
-  \hspace*{8cm}alKhwarizmi@student.ub.ac.id
+  \hspace*{8cm}Malang, 2 Juli 2019  
+  \vspace{1.5cm} \\
+  \hspace*{8cm}Penulis \\
+  \hspace*{8cm}ahmadforesta@student.ub.ac.id
 }
 
 % -----------------------------------------------------------------
@@ -367,7 +375,7 @@
 \include{bab1}
 \include{bab2}
 \include{bab3}
-% \include{bab4}
+\include{bab4}
 % \include{bab5}
 % \include{bab6}
 % \include{bab7}
@@ -376,6 +384,8 @@
 % Bibliography
 % -----------------------------------------------------------------
 % -- \addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+\addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+\emergencystretch=8em % prevent overfull hbox
 \printbibliography[title={DAFTAR PUSTAKA}]
 
 

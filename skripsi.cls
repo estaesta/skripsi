@@ -13,6 +13,9 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{graphicx,latexsym}
+%
+\RequirePackage{array}
+\RequirePackage{multicol}
 
 \setlength{\paperwidth}{210mm}
 \setlength{\paperheight}{297mm}
@@ -50,7 +53,9 @@
 \RequirePackage[top=3cm,bottom=3cm,left=4cm,right=3cm]{geometry}
 
 %% indent paragraph
-\setlength{\parindent}{3em} %Indent approx 6 character
+% \setlength{\parindent}{3em} %Indent approx 6 character
+% indent 6mm
+\setlength{\parindent}{6mm}
 
 
 % ------------------------------------------------------------
@@ -64,6 +69,10 @@
     \setcounter{section}{0}
     \chapter*{#2}
     \addcontentsline{toc}{chapter}{#2}
+    %
+    % \setcounter{equation}{0} % Reset equation counter
+    % \setcounter{figure}{0}   % Reset figure counter
+    % \setcounter{table}{0}    % Reset table counter
   }
 
 \setcounter{tocdepth}{5}
@@ -227,12 +236,12 @@
         \MakeUppercase{\normalfont  NIM: \@idnum}}\\
       \vfill
       \vspace{-3.7cm}
-      \includegraphics[width=0.36\textwidth]{img/logo-ub}
+      \includegraphics[width=0.36\textwidth]{img/logo-ub-new.png}
       \vfill
       \vspace{-3.9cm}
       {\normalfont
         \MakeUppercase{\normalfont PROGRAM STUDI \@dept}\\
-        \MakeUppercase{\normalfont JURUSAN \@dept}\\
+        \MakeUppercase{\normalfont DEPARTEMEN \@dept}\\
         \MakeUppercase{\normalfont\@faculty} \\
         \MakeUppercase{\normalfont\@university}\\
         \MakeUppercase{\normalfont\@city}\\
@@ -290,7 +299,7 @@
 
       \vspace{2cm}
       Mengetahui \\
-      Ketua Jurusan Teknik Informatika \\
+      Ketua Departemen Teknik Informatika \\
       \vspace{2.5cm}
       \underline{Tri Astoto Kurniawan, S.T, M.T, Ph.D} \\
       NIP: 19710518 200312 1 001

@@ -5,64 +5,84 @@
 
 \section{Latar Belakang Masalah}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-tincidunt tellus sit amet tincidunt lobortis. Nulla id tempus
-enim. Curabitur sed enim quam. Duis suscipit in nibh nec
-gravida. Curabitur placerat ullamcorper dolor a rhoncus. Duis ac
-suscipit enim. Ut elementum tortor ligula, fringilla viverra diam
-varius eget. Vivamus quis iaculis lorem. Vivamus nec dignissim libero,
-eu congue sem. Nam id lobortis elit \parencite{foster}.
+\emph{Cardiovaskular disease} (CVD) atau penyakit kardiovaskular menjadi penyebab utama kematian di dunia, dengan perkiraan 17,9 juta kematian pada tahun 2019 \parencite{worldhealthorganizationCardiovascularDiseasesCVDs2021}. Angka kematian tersebut mencakup sekitar 32\% dari total kematian di dunia. Dengan angka kematian yang begitu tinggi, 
+diperlukan langkah preventif untuk dapat mencegah risiko kematian akibat CVD.
 
-Phasellus porttitor purus \textcite{warn} vitae finibus laoreet. Class
-aptent taciti sociosqu ad litora torquent per conubia nostra, per
-inceptos himenaeos. Lorem ipsum dolor sit amet, consectetur adipiscing
-elit. Nunc tempus sed purus sit amet porta. Sed volutpat est ac arcu
-porttitor, non pharetra tortor pharetra. Phasellus vitae dictum
-elit. Curabitur elementum consequat elementum. Integer in vulputate
-metus. Aliquam erat volutpat. Phasellus vitae convallis orci. Etiam ac
-metus tristique, viverra metus a, mattis lectus. Aenean vel vestibulum
-augue.
+% Kesehatan merupakan elemen yang sangat penting dalam kehidupan
+% manusia. Kesadaran akan kebutuhan untuk memantau kondisi kesehatan
+% pribadi telah menjadi fokus utama bagi banyak orang. Teknologi pemantauan
+% kesehatan portabel muncul sebagai solusi untuk menyediakan akses yang mudah
+% dan terjangkau terhadap data kesehatan individu. 
+Pemantauan detak jantung
+menjadi salah satu aspek penting untuk melakukan diagnosis dan pemantauan
+kondisi kesehatan.
+Pemantauan detak jantung memberikan informasi yang dapat digunakan untuk mendeteksi gangguan pada jantung.
+Deteksi gangguan jantung sejak dini penting untuk memungkinkan tindakan pencegahan atau pengobatan yang tepat, sehingga dapat mencegah risiko kematian akibat penyakit kardiovaskular.
+
+% Raspberry Pi adalah suatu komputer mini yang dapat digunakan untuk berbagai tujuan.
+% Berkat ukurannya yang kecil dan konsumsi dayanya yang rendah, Raspberry Pi menjadi platform populer untuk pengembangan berbagai aplikasi, termasuk aplikasi pada bidang kesehatan. Kelebihan dalam hal portabilitas dan kemampuan komputasinya, menjadikan Raspberry Pi sebagai pilihan ideal untuk diintegrasikan dengan berbagai sensor kesehatan.
+
+Long Short-Term Memory (LSTM) merupakan arsitektur jaringan saraf tiruan pengembangan dari \emph{Recurrent Neural Network} (RNN).
+LSTM terkenal akan kemampuannya dalam mengelola data sekuensial atau berurutan.
+Hal ini membuat LSTM sangat sesuai untuk memantau dan memprediksi detak jantung yang merupakan data sekuensial.
+
+% tentang inferencing
+% Efficient inference on edge devices with limited resources is key for broader deployment.
+% The most common approach in literature is to measure processing time of inference as a performance metric.
+Inferensi merupakan proses penggunaan model yang telah dilatih untuk memprediksi data baru. 
+Efisiensi inferensi sangat penting untuk memungkinkan penggunaan model pada perangkat yang luas \parencite{ulkerReviewingInferencePerformance2020}. 
+Pengujian performa inferensi pada beberapa perangkat dapat memberikan informasi mengenai efisiensi model tersebut pada perangkat yang berbeda-beda.
+% Salah satu metrik performa inferensi yang umum digunakan adalah waktu inferensi. 
+% Waktu inferensi yang rendah meningkatkan pengalaman pengguna serta memungkinkan model untuk digunakan secara \textit{real-time}.
+
+Penelitian sebelumnya telah menunjukkan bahwa model LSTM dapat digunakan dengan sukses untuk memprediksi detak jantung dari data elektrokardiogram (ECG) yang merupakan data sekuensial \parencite{shchetininArrhythmiaDetectionUsing2022}. Implementasi dan pengujian performa pada perangkat nyata dapat memberikan informasi yang lebih akurat tentang performa model LSTM dalam memprediksi detak jantung pada kasus nyata.
+
+Pada penelitian lain, \textcite{ahsanuzzamanLowCostPortable2020} mengusulkan suatu sistem alarm dan pemantauan Elektrokardiogram (ECG) pada perangkat portabel. Fokus utama sistem tersebut adalah pada prediksi aritmia (fibrilasi atrium) dengan mengadopsi arsitektur LSTM yang diintegrasikan pada Raspberry Pi 3. Sebagai perantara antara sensor dengan Raspberry Pi, sistem tersebut menggunakan Arduino Uno. Perangkat Android juga digunakan untuk menampilkan data ECG. 
+
+Berdasarkan latar belakang di atas, penelitian ini akan mengembangkan dan mengimplementasikan model prediksi detak jantung berbasis LSTM.
+Selain itu, penelitian ini juga akan melakukan evaluasi model prediksi detak jantung berbasis LSTM pada beberapa perangkat untuk mengetahui performa model tersebut baik
+akurasi, presisi, \emph{recall}, dan \emph{F1-score} maupun waktu inferensi serta penggunaan memori.
+
 
 \section{Rumusan Masalah}
 
-Phasellus porttitor purus vitae finibus laoreet. Class aptent taciti
-sociosqu ad litora torquent per conubia nostra, per inceptos
-himenaeos. Lorem ipsum dolor sit amet, consectetur adipiscing
-elit. Nunc tempus sed purus sit amet porta. Sed volutpat est ac arcu
-porttitor, non pharetra tortor pharetra. Phasellus vitae dictum
-elit. Curabitur elementum consequat elementum. Integer in vulputate
-metus. Aliquam erat volutpat. Phasellus vitae convallis orci. Etiam ac
-metus tristique, viverra metus a, mattis lectus. Aenean vel vestibulum
-augue.
+Berdasarkan latar belakang di atas maka dilakukan penyusunan rumusan masalah sebagai berikut:
 
 \begin{enumerate}
-\item  Phasellus porttitor purus vitae finibus \emph{laoreet}.
-\item Class aptent taciti sociosqu ad litora torquent per conubia nostra.
+  % \item Bagaimana mengembangkan dan mengimplementasikan model prediksi detak jantung berbasis LSTM pada Raspberry Pi.
+  % \item Bagaimana hasil evaluasi model prediksi detak jantung berbasis LSTM pada Raspberry Pi.
+  \item Bagaimana nilai akurasi, presisi, \emph{recall}, dan \emph{F1-score} dari model prediksi detak jantung berbasis LSTM.
+  \item Bagaimana waktu inferensi serta penggunaan memori dari model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
 \end{enumerate}
 
 
 \section{Tujuan Penelitian}
+Tujuan dilakukannya penelitian ini adalah sebagai berikut:
 
 \begin{enumerate}
-\item  Phasellus porttitor purus vitae finibus \emph{laoreet}.
-\item Class aptent taciti sociosqu ad litora torquent per conubia nostra.
+  % \item Mengembangkan dan mengimplementasikan model prediksi detak jantung berbasis LSTM pada Raspberry Pi.
+  % \item Melakukan evaluasi model prediksi detak jantung berbasis LSTM pada Raspberry Pi.
+  \item Mengetahui nilai akurasi, presisi, \emph{recall}, dan \emph{F1-score} dari model prediksi detak jantung berbasis LSTM.
+  \item Mengetahui waktu inferensi serta penggunaan memori dari model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
 \end{enumerate}
 
 
 \section{Manfaat Penelitian}
 
-Curabitur elementum consequat elementum. Integer in vulputate
-metus. Aliquam erat volutpat. Phasellus vitae convallis orci. Etiam ac
-metus tristique, viverra metus a, mattis lectus. Aenean vel vestibulum
-augue.
+Manfaat dari penelitian ini adalah mengetahui hasil dari pengembangan dan implementasi model prediksi detak jantung berbasis LSTM, serta mengetahui hasil pengujian dan evaluasi model prediksi detak jantung berbasis LSTM pada beberapa perangkat. Hasil penelitian ini diharapkan dapat memberikan informasi yang berguna dalam pengembangan sistem pemantauan detak jantung berbasis LSTM.
 
 
 \section{Batasan Masalah}
 
+Pada penelitian ini terdapat batasan masalah yang bertujuan untuk memfokuskan penelitian ini. Batasan masalah penelitian ini adalah sebagai berikut:
 \begin{enumerate}
-\item  Phasellus porttitor purus vitae finibus \emph{laoreet}.
-\item Class aptent taciti sociosqu ad litora torquent per conubia nostra.
+  \item Prediksi yang dilakukan pada penelitian terbatas pada lima kelas sesuai rekomendasi AAMI (Association for the Advancement of Medical Instrumentation).
+  \item Pengujian yang dilakukan menggunakan data detak jantung yang telah diperoleh sebelumnya menggunakan sensor ECG Polar H10.
+  \item Deteksi detak jantung dilakukan secara \textit{batch}.
+    % , bukan secara \textit{real-time}.
 \end{enumerate}
+
+
 
 
 \section{Sistematika Pembahasan}
@@ -82,7 +102,7 @@ digunakan sebagai acuan dan dasar dalam penelitian.\\
 \textbf{BAB III : METODOLOGI PENELITIAN}
 
 Pada bab ini dijelaskan metode yang digunakan dalam penelitian
-meliputi langkah kerja, pertanyaan penilitian, alat dan bahan, serta
+meliputi langkah kerja, pertanyaan penelitian, alat dan bahan, serta
 tahapan dan alur penelitian.\\
 
 \noindent
