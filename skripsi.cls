@@ -70,9 +70,9 @@
     \chapter*{#2}
     \addcontentsline{toc}{chapter}{#2}
     %
-    % \setcounter{equation}{0} % Reset equation counter
-    % \setcounter{figure}{0}   % Reset figure counter
-    % \setcounter{table}{0}    % Reset table counter
+    \setcounter{equation}{0} % Reset equation counter
+    \setcounter{figure}{0}   % Reset figure counter
+    \setcounter{table}{0}    % Reset table counter
   }
 
 \setcounter{tocdepth}{5}
