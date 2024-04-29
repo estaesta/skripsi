@@ -10,11 +10,33 @@
 
 % comments
 %% comments
-Beberapa referensi digunakan dalam penelitian ini. Pramukantoro dan Gofuku (\citeyear{pramukantoroHeartbeatClassifierContinuous2022}) dalam penelitiannya telah mengusulkan beberapa algoritma untuk melakukan klasifikasi detak jantung. Algoritma tersebut menggunakan RR-Interval dengan 9 deskriptor sebagai fiturnya. Penelitian tersebut menggunakan metode \textit{machine learning Decision Tree, Gradient Boosting, k-Nearest Neighbors, Multi-layer Perceptron, Random Forest}, dan \textit{Support Vector Machine}, serta model \textit{deep learning Artificial Neural Network} (ANN). Penelitian tersebut mencapai nilai akurasi 99,31\% dengan menggunakan metode \textit{decision tree}, serta teknik \textit{random oversampling} untuk menambah jumlah sampel. Selain itu, penelitian tersebut juga melakukan eksperimen implementasi inferensi secara \textit{realtime} untuk memprediksi kesehatan pasien dan mencapai hasil yang baik.
+Beberapa referensi digunakan dalam penelitian ini. 
+\textcite{pramukantoroHeartbeatClassifierContinuous2022} telah mengusulkan beberapa algoritma untuk melakukan klasifikasi detak jantung dalam penelitiannya. 
+Algoritma tersebut menggunakan RR-Interval dengan 9 deskriptor sebagai fiturnya.
+Penelitian tersebut menggunakan metode \textit{machine learning Decision Tree, Gradient Boosting, k-Nearest Neighbors, Multi-layer Perceptron, Random Forest}, dan \textit{Support Vector Machine}, serta model \textit{deep learning} berupa \textit{Artificial Neural Network} (ANN). 
+Penelitian tersebut mencapai nilai akurasi 99,31\% dengan menggunakan metode \textit{decision tree}, serta teknik \textit{random oversampling} untuk menambah jumlah sampel.
+Selain itu, penelitian tersebut juga melakukan eksperimen implementasi inferensi secara \textit{realtime} untuk memprediksi kesehatan pasien dan mencapai hasil yang baik.
 
-Pada penelitian lain, \textcite{mondejar-guerraHeartbeatClassificationFusing2019} mengusulkan algoritma klasifikasi detak jantung dengan menggunakan fitur RR-Interval dengan 8 deskriptor. Dengan menggunakan fitur RR-Interval dan metode SVM, penelitian tersebut mendapatkan nilai akurasi 76,2\%. Penelitian tersebut juga menggunakan metode \textit{ensemble} SVM dengan fitur gabungan RR-Interval, wavelet, dan \textit{higher order statistics} (HOS) dan mendapat nilai akurasi 94,5\%.
+% Pada penelitian lain, \textcite{mondejar-guerraHeartbeatClassificationFusing2019} mengusulkan algoritma klasifikasi detak jantung dengan menggunakan fitur RR-Interval dengan 8 deskriptor. Dengan menggunakan fitur RR-Interval dan metode SVM, penelitian tersebut mendapatkan nilai akurasi 76,2\%. Penelitian tersebut juga menggunakan metode \textit{ensemble} SVM dengan fitur gabungan RR-Interval, wavelet, dan \textit{higher order statistics} (HOS) dan mendapat nilai akurasi 94,5\%.
+
+Pada penelitian lain, \textcite{shchetininArrhythmiaDetectionUsing2022} telah melakukan penelitian untuk melakukan klasifikasi detak jantung dengan menggunakan metode \textit{deep learning} \textit{Long Short-Term Memory} (LSTM). 
+Penelitian tersebut menggunakan dataset MIT-BIH Arrhythmia Database dan melakukan klasifikasi detak jantung menjadi 5 kelas, yaitu N, SVEB, VEB, F, dan Q.
+Penelitian tersebut membuktikan bahwa metode LSTM digabungkan dengan teknik \textit{oversampling} SMOTE ENN dapat melakukan klasifikasi detak jantung dengan akurasi 97,22\%. 
+% Pada penelitian lain, \textcite{shchetininArrhythmiaDetectionUsing2022} telah membuktikan bahwa metode LSTM dapat digunakan untuk melakukan klasifikasi detak jantung dan mendapatkan hasil yang baik.
+% Penelitian tersebut melakukan klasifikasi detak jantung menjadi 5 kelas, yaitu N, SVEB, VEB, F, dan Q.
+
+Pada penelitian sebelumnya, \textcite{sururiComparisonSeveralWavelet2023} telah melakukan perbandingan beberapa metode \textit{wavelet} sebagai metode ekstraksi fitur untuk inferensi klasifikasi detak jantung. 
+Penelitian tersebut menggunakan metode \textit{wavelet Continuous Wavelet Transform} (CWT), \textit{Discrete Wavelet Transform} (DWT), dan \textit{Stationary Wavelet Transform} (SWT) untuk melakukan ekstraksi fitur dan digabungkan dengan metode \textit{deep learning Convolutional Neural Network} (CNN) untuk melakukan klasifikasi detak jantung menjadi 5 kelas.
+Penelitian tersebut juga melakukan pengujian inferensi menggunakan dataset primer sepanjang 30 menit untuk mengevaluasi performa inferensi model klasifikasi detak jantung.
+Penelitian tersebut mendapatkan hasil bahwa metode CWT memberikan nilai akurasi tertinggi, yaitu 99,08\%, namun memiliki waktu inferensi yang paling lama, yaitu 21,1326 detik dan penggunaan memori yang paling tinggi, yaitu 656,02 MB.
+Sementara itu, metode DWT memberikan nilai akurasi terendah, yaitu 96,70\%, namun memiliki waktu inferensi tercepat, yaitu 12,9248 detik dan penggunaan memori terendah, yaitu 109,98 MB.
+
 
 \section{Landasan Teori}
+
+\subsection{Detak Jantung}
+\label{subsec: landasan-detak-jantung}
+
 
 
 \subsection{\emph{Electrocardiogram} (ECG)}
@@ -32,7 +54,7 @@ Gambar \ref{fig: ecg-morphology} menunjukkan morfologi gelombang ECG. ECG terdir
   \label{fig: ecg-morphology}
 \end{figure}
 
-\subsection{\textit{Long Short-Term Memory} (LSTM)}
+\subsubsection{\textit{Long Short-Term Memory} (LSTM)}
 \label{subsec: landasan-lstm}
 
 \textit{Long Short-Term Memory} atau dapat disingkat LSTM merupakan pengembangan dari metode \textit{deep learning Recurrent Neural Network} (RNN). LSTM dirancang untuk mengatasi salah satu masalah yang umum terjadi pada RNN tradisional, yaitu hilangnya informasi masa lalu \parencite{hochreiterLongShorttermMemory1997}. Metode LSTM dapat diterapkan pada klasifikasi, pengolahan, dan prediksi berdasarkan data sekuensial, seperti teks dan suara,  termasuk juga data yang terkait dengan bidang kesehatan.
@@ -85,10 +107,13 @@ Di mana \(f_t\), \(i_t\), \(o_t\) dan \(c_t\) masing-masing menunjukkan nilai \e
 
 % heart related disease class
 % N, sveb, veb, f, dan q
-\section{Ke}
+\section{Klasifikasi Detak Jantung}
+
+% \section{Inferensi}
 
 % metrik evaluasi
 % akurasi, presisi, recall, f1-score
 
 % TODO
 % landasan teori lain
+% penerapan lstm di edge device
