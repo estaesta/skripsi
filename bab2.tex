@@ -34,19 +34,53 @@ Sementara itu, metode DWT memberikan nilai akurasi terendah, yaitu 96,70\%, namu
 
 \section{Landasan Teori}
 
-\subsection{Detak Jantung}
-\label{subsec: landasan-detak-jantung}
+% \subsection{Detak Jantung}
+% \label{subsec: landasan-detak-jantung}
 
 
+% ectopic beats
+\subsection{Detak \textit{Ectopic}}
+\label{subsec: landasan-ectopic}
+
+% Ectopic beats are extra beats that arise from an abnormal site that is different from the normal pacemaker of the heart (the sinus node). Ectopic beats can be thought of as extra electrical impulse that originate from an abnormal ‘switch’. Therefore, in a patient with ectopic beats, after every few beats from natural pacemaker (the sinus node ‘switch’), an extra beat will fire off from the abnormal site (ectopic ‘switch’). The extra beat typically occurs a short time after a normal beat and is therefore commonly referred to as a premature ectopic beat. In the majority of cases, the abnormal ‘switch’ fires off in a random fashion and therefore the heart does not beat in a synchronized fashion.
+%
+% Ectopic beats may arise from multiple locations in the heart. Extra beats that arise from the top chambers of the heart (atria) are called supraventricular ectopic beats (or premature supraventricular ectopic beats). Extra beats arising from the lower chambers (ventricles) are known as ventricular ectopic beats (or premature ventricular ectopic beats).
+
+% Ectopic beats are abnormal beats that are due to unusual impulses. These abnormal excitations originate from atrio-ventricular junction or ventricles rather than the sino-atrial node. Ectopic beats can be seen in the ECG signal as abnormal waveforms.
+
+% Ectopic heartbeats are changes in a heartbeat that is otherwise normal. These changes lead to extra or skipped heartbeats. 
+% Ectopic beats may be caused or made worse by smoking, alcohol use, caffeine, stimulant medicines, and some street drugs.
+
+
+Menurut kamus \textcite{merriam-websterDefinitionECTOPIC2024}, istilah \textit{ectopic} mengacu pada kejadian yang terjadi pada posisi yang tidak normal.
+% Menurut kamus \textcite{merriam-websterDefinitionECTOPIC2024}, istilah \textit{ectopic} memiliki arti terjadi pada posisi yang tidak normal.
+Detak \textit{ectopic} atau \textit{ectopic beats} adalah detak jantung abnormal yang terjadi di luar ritme detak jantung normal.
+% Detak jantung normalnya dipacu secara alami oleh \textit{nodus sinoatrial} (SA).
+Detak jantung normalnya dipacu oleh \textit{nodus sinoatrial} (SA), sebuah struktur di jantung yang berfungsi untuk memacu detak jantung secara alami.
+Namun, detak \textit{ectopic} terjadi ketika impuls listrik yang memacu detak jantung bukan berasal dari SA, melainkan dari tempat lain di dalam jantung \parencite{mahidasaagarEctopicBeats}.
+Detak \textit{ectopic} dapat berasal dari serambi jantung (atrium) maupun bilik jantung (ventrikel).
+Detak \textit{ectopic} yang berasal dari atrium disebut dengan \textit{supraventricular ectopic beats}, sedangkan detak \textit{ectopic} yang berasal dari ventrikel disebut dengan \textit{ventricular ectopic beats}.
+Detak \textit{ectopic} dapat dikenali melalui pola gelombang yang tidak normal pada sinyal \textit{electrocardiogram} (ECG).
+% \subsubsection{\textit{Supraventricular Ectopic Beats} (SVEB)}
+% \label{subsubsec: landasan-sveb}
+%
+% \subsubsection{\textit{Ventricular Ectopic Beats} (VEB)}
+% \label{subsubsec: landasan-veb}
+
+% mitbih
 
 \subsection{\emph{Electrocardiogram} (ECG)}
 \label{subsec: landasan-ecg}
 
-\textit{Electrocardiogram} (ECG) merupakan uji kardiologi yang umum dilakukan untuk merekam aktivitas listrik jantung selama suatu periode dengan menggunakan elektroda \parencite{yoonDeepLearningbasedElectrocardiogram2019}. Elektroda tersebut mendeteksi perubahan listrik kecil yang disebabkan oleh depolarisasi dan repolarisasi otot jantung pada tiap detaknya. Hasil dari ECG tersebut berupa gelombang yang dapat digunakan untuk diagnosis medis. ECG dapat digunakan untuk berbagai tujuan, seperti mengukur konsistensi, ukuran, dan lokasi denyut jantung serta untuk mengidentifikasi kerusakan jantung. 
+\textit{Electrocardiogram} (ECG) merupakan uji kardiologi yang umum dilakukan untuk merekam aktivitas listrik jantung selama suatu periode dengan menggunakan elektroda \parencite{yoonDeepLearningbasedElectrocardiogram2019}.
+Elektroda tersebut mendeteksi perubahan listrik kecil yang disebabkan oleh depolarisasi dan repolarisasi otot jantung pada tiap detaknya.
+Hasil dari ECG tersebut berupa gelombang yang dapat digunakan untuk diagnosis medis.
+ECG dapat digunakan untuk berbagai tujuan, seperti mengukur konsistensi, ukuran, dan lokasi denyut jantung serta untuk mengidentifikasi kerusakan jantung.
+
 
 Gambar \ref{fig: ecg-morphology} menunjukkan morfologi gelombang ECG. ECG terdiri dari beberapa komponen: gelombang P, kompleks QRS, dan gelombang T, serta durasi antara komponen tersebut \parencite{anbalaganAnalysisVariousTechniques2023}.  Gelombang P menunjukkan depolarisasi atrium, kompleks QRS menunjukkan depolarisasi ventrikel, dan gelombang T menunjukkan repolarisasi ventrikel.
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \centering
   \includegraphics[width=.5\linewidth]{img/ecg-morphology.png}
   \caption{Morfologi gelombang ECG}
@@ -54,7 +88,12 @@ Gambar \ref{fig: ecg-morphology} menunjukkan morfologi gelombang ECG. ECG terdir
   \label{fig: ecg-morphology}
 \end{figure}
 
-\subsubsection{\textit{Long Short-Term Memory} (LSTM)}
+\subsection{\textit{MIT-BIH Arrhythmia Database}}
+\label{subsec: landasan-mitbih}
+
+\textit{MIT-BIH Arrhythmia Database} adalah dataset publik yang berisi rekaman ECG dari 47 pasien yang berdurasi 30 menit \parencite{moodyImpactMITBIHArrhythmia2001}.
+
+\subsection{\textit{Long Short-Term Memory} (LSTM)}
 \label{subsec: landasan-lstm}
 
 \textit{Long Short-Term Memory} atau dapat disingkat LSTM merupakan pengembangan dari metode \textit{deep learning Recurrent Neural Network} (RNN). LSTM dirancang untuk mengatasi salah satu masalah yang umum terjadi pada RNN tradisional, yaitu hilangnya informasi masa lalu \parencite{hochreiterLongShorttermMemory1997}. Metode LSTM dapat diterapkan pada klasifikasi, pengolahan, dan prediksi berdasarkan data sekuensial, seperti teks dan suara,  termasuk juga data yang terkait dengan bidang kesehatan.
@@ -107,7 +146,7 @@ Di mana \(f_t\), \(i_t\), \(o_t\) dan \(c_t\) masing-masing menunjukkan nilai \e
 
 % heart related disease class
 % N, sveb, veb, f, dan q
-\section{Klasifikasi Detak Jantung}
+% \section{Klasifikasi Detak Jantung}
 
 % \section{Inferensi}
 
@@ -117,3 +156,4 @@ Di mana \(f_t\), \(i_t\), \(o_t\) dan \(c_t\) masing-masing menunjukkan nilai \e
 % TODO
 % landasan teori lain
 % penerapan lstm di edge device
+
