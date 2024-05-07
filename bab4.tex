@@ -5,10 +5,136 @@
 
 
 
-% TO DO: ML pipeline
+% question: perancangan model? atau digabung dengan tahap pelatihan model?
 
 
 \mychapter{4}{BAB 4 PEMBUATAN MODEL}
+
+Pada bab ini, dijelaskan tahapan pembuatan model yang digunakan dalam penelitian ini. Tahapan pembuatan model meliputi \textit{preprocessing} data, ekstraksi fitur, pelatihan model, dan evaluasi model. Gambar \ref{fig:alur-model} menunjukkan alur pembuatan model yang digunakan dalam penelitian ini.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=1\textwidth]{img/lstm-ML Pipeline.drawio.pdf}
+  \end{center}
+  \caption{Alur pembuatan model}
+  \label{fig:alur-model}
+\end{figure}
+
+\section{\emph{Preprocessing} Data}
+\label{subsec: bab4-preprocessing-data}
+
+\textit{Preprocessing} dilakukan untuk memastikan kualitas dan keandalan data yang digunakan dalam proses pelatihan model. 
+Terdapat beberapa tahap \textit{preprocessing} yang dilakukan pada penelitian ini, yaitu penghapusan \textit{noise} berfrekuensi tinggi, penghapusan \textit{baseline wander} (BW), dan normalisasi.
+Data ECG 
+% metode penghilangan frekuensi tinggi
+%     ecg = denoise_wavelet(ecg, method='VisuShrink', mode='soft', wavelet_levels=10, wavelet='db8', rescale_sigma='True')
+
+Frekuensi tinggi pada data ECG dapat dianggap sebagai \textit{noise} yang dapat mengganggu proses klasifikasi detak jantung.
+\textit{Noise} tersebut dapat dihilangkan dengan menggunakan metode \textit{wavelet denoise}
+
+Setelah menghilangkan \textit{noise} berfrekuensi tinggi, tahap selanjutnya adalah menghilangkan \textit{baseline wander} (BW).
+% elaborate
+
+\textit{Baseline wander} atau BW merupakan \textit{noise} berfrekuensi rendah yang terdapat pada ECG.
+BW dapat disebabkan oleh beberapa faktor, seperti pernapasan, elektroda yang bermuatan listrik, dan gerakan dari pasien \parencite{lenisComparisonBaselineWander2017}.
+% metode baseline wander
+        % baseline = medfilt(ecg, 71)
+        % baseline = medfilt(baseline, 215)
+        %
+        % # Remove Baseline
+        % for i in range(0, len(ecg)):
+        %     ecg[i] = ecg[i] - baseline[i]
+% BW dihilangkan dengan menggunakan metode \textit{median filter} dengan panjang jendela 71 dan 215.
+
+BW dihilangkan dengan melakukan substraksi antara sinyal ECG dengan \textit{trend} sinyal.
+\textit{Trend} sinyal diperoleh dengan menggunakan metode \textit{median filter} sebanyak dua kali dengan panjang jendela 71 dan 215.
+% Median filtering, as mentioned earlier, is another method commonly used for baseline wander removal. It involves replacing each data point in the signal with the median value within a specified window around that point. This approach can effectively remove baseline variations while preserving the shape of the ECG waveform.
+\textit{Median filter} akan menggantikan setiap titik data pada sinyal dengan nilai median dalam jendela yang ditentukan.
+\textit{Median filter} didefinisikan oleh persamaan \ref{eq:median-filter}.
+\begin{equation}
+    % perlu dicek lagi
+    y[n] = \text{median}(x[n - \frac{M}{2} : n + \frac{M}{2}])
+    \label{eq:median-filter}
+\end{equation}
+Dimana $y[n]$ adalah sinyal hasil \textit{median filter}, $x[n]$ adalah sinyal asli, dan $M$ adalah panjang jendela \textit{median filter}.
+Setelah \textit{baseline wander} dihilangkan, data dinormalisasi untuk menghindari perbedaan skala.
+Normalisasi yang dilakukan yaitu \textit{Z-score normalization}.
+% metode normalisasi
+
+Gambar \ref{fig:sebelum-prep} menunjukkan data sebelum dilakukan \textit{preprocessing}, sedangkan Gambar \ref{fig:setelah-prep} menunjukkan data setelah dilakukan \textit{preprocressing}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{./img/sebelum_prep.png}
+	\caption{Data sebelum \textit{preprocessing}}
+	\label{fig:sebelum-prep}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{./img/setelah_prep.png}
+  \caption{Data setelah \textit{preprocessing}}
+  \label{fig:setelah-prep}
+\end{figure}
+
+
+\section{Ekstraksi Fitur}
+\label{subsec: bab4-ekstraksi-fitur}
+
+Kami menggunakan RR-Interval sebagai fitur dalam penelitian ini.
+% taruh sini atau bab 2?
+RR-Interval adalah jarak antara dua titik R pada sinyal ECG.
+Visualisasi dari RR-Interval ditunjukkan oleh Gambar \ref{fig:rri}.
+Dari interval RR ini, kami mengekstraksi 9 fitur, yaitu RR0, RR-1, RR+1, RR0/avgRR, tRR0, RR-1/avgRR, RR-1/RR0, RR+1/avgRR, dan RR+1/RR0 \parencite{pramukantoroHeartbeatClassifierContinuous2022}.
+Tabel \ref{tab:rri} menunjukkan deskripsi lengkap dari setiap fitur.
+Ekstraksi dilakukan dengan jendela sepanjang 42 data. Rata-rata RR-Interval (avgRR) merupakan rata-rata dari 42 data, termasuk RR-0. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.7]{img/lstm-Page-7.drawio.pdf}
+  \caption{RR-Interval}
+  \label{fig:rri}
+\end{figure}
+
+\begin{table}[H]
+  \caption{Deskripsi RR-Interval}
+\begin{center}
+\footnotesize
+\begin{tabular}{c @{\hspace{1cm}} c}
+\hline
+Fitur & Deskripsi\\
+\hline
+RR0 & Nilai RRi saat ini\\
+RR-1 & Nilai RRi sebelumnya\\
+RR+1  & Nilai RRi selanjutnya\\
+RR0/avgRR & Nilai RRi saat ini dibagi dengan rata-rata 42 RRi sebelumnya\\
+tRR0  & (RRi saat ini - rata-rata RRi) / stddevRRi\\
+RR-1/avgRR & Nilai RRi sebelumnya / rata-rata RRi\\
+RR-1/RR0 & Nilai RRi sebelumnya / RRi saat ini\\
+RR+1/avgRR & Nilai RRi selanjutnya / rata-rata RRi\\
+RR+1/RR0 & Nilai RRi selanjutnya / RRi saat ini\\
+\hline
+\end{tabular}
+\end{center}
+\center
+Sumber: \textcite{pramukantoroHeartbeatClassifierContinuous2022}
+\label{tab:rri}
+\end{table}
+
+%contoh extracted feature
+
+% considering cuma pakai lstm256 tapi dengan fitur lain
+\section{Perancangan Model LSTM}
+\label{subsec: bab4-pembuatan-model-lstm}
+Pada tahap ini, penulis membuat model berbasis LSTM yang akan digunakan untuk melakukan klasifikasi detak jantung. 
+% Dalam penelitian ini, 
+Terdapat tiga jenis model yang akan digunakan pada penelitian, yaitu \textit{Long Short-Term Memory} (LSTM), \textit{Bidirectional} LSTM (Bi-LSTM), serta LSTM \textit{Fully Convolutional Network} (LSTM-FCN). 
+Pembuatan model meliputi pembuatan arsitektur model, pelatihan model, dan evaluasi model.
+Model dibuat dengan menggunakan \textit{framework} TensorFlow dan dilatih sebanyak 50 \textit{epoch}.
+
+
+% LSTM merupakan pengembangan dari \textit{Recurrent Neural Network} (RNN) yang dirancang untuk mengatasi masalah yang umum terjadi pada RNN tradisional, yaitu hilangnya informasi masa lalu \parencite{hochreiterLongShorttermMemory1997}.  LSTM memiliki kemampuan untuk mengingat informasi yang disimpan dalam jangka waktu yang lama. 
+
 
 Arsitektur model LSTM yang digunakan dalam penelitian ini ditunjukkan oleh Gambar \ref{fig:arslstm}. Model terdiri dari tiga \textit{layer}, yakni satu buah LSTM \textit{layer} dan dua buah \textit{dense layer}. Terdapat dua varian model LSTM yang dilatih dengan menggunakan dua \textit{hyperparameter} berbeda. Model pertama memiliki 512 unit LSTM pada \textit{layer} pertama dan 256 unit \textit{dense} pada \textit{layer} kedua. Sementara itu, model kedua memiliki 256 unit LSTM pada layer pertama dan 128 unit \textit{dense} pada \textit{layer} kedua.
 

@@ -91,7 +91,92 @@ Gambar \ref{fig: ecg-morphology} menunjukkan morfologi gelombang ECG. ECG terdir
 \subsection{\textit{MIT-BIH Arrhythmia Database}}
 \label{subsec: landasan-mitbih}
 
-\textit{MIT-BIH Arrhythmia Database} adalah dataset publik yang berisi rekaman ECG dari 47 pasien yang berdurasi 30 menit \parencite{moodyImpactMITBIHArrhythmia2001}.
+% \textit{MIT-BIH Arrhythmia Database} adalah dataset publik yang berisi rekaman ECG dari 47 pasien yang berdurasi 30 menit \parencite{moodyImpactMITBIHArrhythmia2001}.
+\textit{MIT-BIH Arrhythmia Database} merupakan salah satu dataset publik yang dikembangkan oleh \textit{Massachusetts Institute of Technology} (MIT) dan \textit{Beth Israel Hospital} (BIH) \parencite{moodyImpactMITBIHArrhythmia2001}.
+Dataset ini berisi 48 rekaman ECG dari 47 pasien yang masing-masing berdurasi 30 menit dan terdiri dari dua kanal.
+Dari 48 rekaman tersebut, data 102, 104, 107, dan 217 berisi data detak jantung yang sedang dipacu.
+Dataset ini direkam dengan frekuensi 360 Hz dan resolusi 11-bit.
+Setiap detak jantung pada dataset, telah diberi label dan anotasi oleh para ahli.
+% Pemberian label pada detak jantung dilakukan dengan menggunakan simbol-simbol tertentu.
+% Simbol-simbol tersebut dideskripsikan pada tabel \ref{tab:beat_symbols}.
+Pemberian label dilakukan menggunakan simbol-simbol tertentu yang dijelaskan dalam Tabel \ref{tab:beat_symbols}.
+
+% tabel simbol yang digunakan pada dataset
+
+% Symbol	Meaning
+% · or N	Normal beat
+% L	Left bundle branch block beat
+% R	Right bundle branch block beat
+% A	Atrial premature beat
+% a	Aberrated atrial premature beat
+% J	Nodal (junctional) premature beat
+% S	Supraventricular premature beat
+% V	Premature ventricular contraction
+% F	Fusion of ventricular and normal beat
+% [	Start of ventricular flutter/fibrillation
+% !	Ventricular flutter wave
+% ]	End of ventricular flutter/fibrillation
+% e	Atrial escape beat
+% j	Nodal (junctional) escape beat
+% E	Ventricular escape beat
+% /	Paced beat
+% f	Fusion of paced and normal beat
+% x	Non-conducted P-wave (blocked APB)
+% Q	Unclassifiable beat
+% |	Isolated QRS-like artifact
+
+\begin{table}[H]
+    \centering
+    \caption{Deskripsi simbol pada \textit{MIT-BIH Arrhythmia Database}}
+    \begin{tabular}{|c|l|}
+    \hline
+    \textbf{Simbol} & {\centering \textbf{Deskripsi}} \\
+    \hline
+    % $\cdot$ or N & Normal beat \\
+    $\cdot$ atau N & Denyut normal \\
+    % L & Left bundle branch block beat \\
+    L & Denyut \textit{left bundle branch block} (LBBB) \\
+    % R & Right bundle branch block beat \\
+    R & Denyut \textit{right bundle branch block} (RBBB) \\
+    % A & Atrial premature beat \\
+    A & \textit{Atrial premature beat} (APB) \\
+    % a & Aberrated atrial premature beat \\
+    a & \textit{Aberrated atrial premature beat} \\
+    % J & Nodal (junctional) premature beat \\
+    J & \textit{Nodal (junctional) premature beat} \\
+    % S & Supraventricular premature beat \\
+    S & \textit{Supraventricular premature beat} \\
+    % V & Premature ventricular contraction \\
+    V & \textit{Premature ventricular contraction} (PVC) \\
+    % F & Fusion of ventricular and normal beat \\
+    F & Gabungan denyut ventrikel dan normal \\
+    % {[} & Start of ventricular flutter/fibrillation \\
+    {[} & Awal dari \textit{ventricular flutter/fibrillation} \\
+    % ! & Ventricular flutter wave \\
+    ! & \textit{Ventricular flutter wave} \\
+    % {]} & End of ventricular flutter/fibrillation \\
+    {]} & Akhir dari \textit{ventricular flutter/fibrillation} \\
+    % e & Atrial escape beat \\
+    e & \textit{Atrial escape beat} \\
+    % j & Nodal (junctional) escape beat \\
+    j & \textit{Nodal (junctional) escape beat} \\
+    % E & Ventricular escape beat \\
+    E & \textit{Ventricular escape beat} \\
+    % / & Paced beat \\
+    / & Denyut yang dipacu \\
+    % f & Fusion of paced and normal beat \\
+    f & Gabungan denyut dipacu dan normal \\
+    % x & Non-conducted P-wave (blocked APB) \\
+    x & Gelombang P yang tidak terkonduksi \\
+    % Q & Unclassifiable beat \\
+    Q & Denyut yang tidak dapat diklasifikasikan \\
+    % | & Isolated QRS-like artifact \\
+    \hline
+    \end{tabular} \\
+    \vspace{0.5em}
+    Sumber: \textcite{moodyImpactMITBIHArrhythmia2001}
+    \label{tab:beat_symbols}
+\end{table}
 
 \subsection{\textit{Long Short-Term Memory} (LSTM)}
 \label{subsec: landasan-lstm}
