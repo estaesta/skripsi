@@ -35,12 +35,13 @@ Metode yang umum digunakan untuk memantau detak jantung adalah dengan menggunaka
 % inferencing
 % for that reason, 
 
-\textit{Electrocardiogram} (ECG) merupakan rekaman listrik dari aktivitas jantung yang direkam secara non-invasif melalui elektroda yang ditempatkan pada kulit \parencite{sattarElectrocardiogram2024}.
-% Melalui analisis data ECG, dapat dilakukan deteksi gangguan pada jantung.
-Dengan melakukan analisis ECG, dapat dilakukan diagnosis dan deteksi gangguan pada jantung.
-Analisis data ECG umumnya dilakukan oleh dokter atau tenaga medis yang berpengalaman.
-Namun, analisis ECG secara manual memerlukan waktu yang lama, melelahkan, dan membutuhkan biaya yang tinggi \parencite{anbalaganAnalysisVariousTechniques2023}.
-Untuk mengatasi hal tersebut, penelitian tentang analisis data ECG secara otomatis telah berkembang pesat.
+\textit{Electrocardiogram} (ECG) atau juga dikenal dengan elektrokardiogram (EKG) adalah rekaman listrik dari aktivitas jantung yang direkam secara non-invasif melalui elektroda yang ditempatkan pada kulit \parencite{sattarElectrocardiogram2024}.
+Rekaman ini berbentuk sinyal yang merepresentasikan aktivitas listrik jantung selama periode waktu tertentu.
+Sinyal ECG memiliki pola tertentu yang dapat digunakan untuk mendiagnosis berbagai gangguan jantung.
+% Analisis data ECG umumnya dilakukan oleh dokter atau tenaga medis yang berpengalaman.
+Untuk mendiagnosis gangguan jantung, analisis data ECG umumnya dilakukan oleh dokter atau tenaga medis yang berpengalaman.
+Akan tetapi, analisis ECG secara manual memerlukan waktu yang lama, melelahkan, dan membutuhkan biaya yang tinggi \parencite{anbalaganAnalysisVariousTechniques2023}.
+Untuk mengatasi permasalahan tersebut, penelitian mengenai analisis data ECG secara otomatis telah berkembang pesat.
 
 % \textit{Long Short-Term Memory} (LSTM) merupakan arsitektur jaringan saraf tiruan pengembangan dari \emph{Recurrent Neural Network} (RNN).
 % LSTM terkenal akan kemampuannya dalam mengelola data sekuensial atau berurutan.
@@ -48,8 +49,8 @@ Untuk mengatasi hal tersebut, penelitian tentang analisis data ECG secara otomat
 % Penelitian sebelumnya telah menunjukkan bahwa model LSTM dapat digunakan dengan sukses untuk memprediksi detak jantung dari data elektrokardiogram (ECG) yang merupakan data sekuensial \parencite{shchetininArrhythmiaDetectionUsing2022}. Implementasi dan pengujian performa pada perangkat nyata dapat memberikan informasi yang lebih akurat tentang performa model LSTM dalam memprediksi detak jantung pada kasus nyata.
 
 % \textcite{shchetininArrhythmiaDetectionUsing2022} telah mengembangkan model prediksi detak jantung berbasis LSTM yang mampu memprediksi detak jantung dari data ECG.
-\textcite{shchetininArrhythmiaDetectionUsing2022} telah membuktikan bahwa model \textit{deep learning} berbasis \emph{Long Short-Term Memory} (LSTM) dapat digunakan untuk memprediksi detak jantung dari data ECG.
-Model tersebut mampu memprediksi detak jantung dengan akurasi yang tinggi.
+\textcite{shchetininArrhythmiaDetectionUsing2022} telah membuktikan bahwa model \textit{deep learning} berbasis \emph{Long Short-Term Memory} (LSTM) dapat digunakan untuk melakukan klasifikasi detak jantung menggunakan data ECG.
+Model tersebut mampu mengklasifikasikan detak jantung ke dalam lima kelas dengan akurasi yang tinggi.
 LSTM merupakan arsitektur jaringan saraf tiruan yang dikembangkan dari \emph{Recurrent Neural Network} (RNN).
 LSTM terkenal akan kemampuannya dalam mengelola data sekuensial atau berurutan.
 Hal ini membuat LSTM cocok digunakan untuk memprediksi detak jantung yang merupakan data sekuensial.
