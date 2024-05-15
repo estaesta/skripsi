@@ -301,8 +301,8 @@
       Mengetahui \\
       Ketua Departemen Teknik Informatika \\
       \vspace{2.5cm}
-      \underline{Tri Astoto Kurniawan, S.T, M.T, Ph.D} \\
-      NIP: 19710518 200312 1 001
+      \underline{Achmad Basuki, S.T., M.MG., Ph.D} \\
+      NIP: 19741118 200312 1 002
     \end{singlespace}
 
   \end{center}
