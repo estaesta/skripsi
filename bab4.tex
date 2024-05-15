@@ -23,9 +23,34 @@ Pada bab ini, dijelaskan tahapan pembuatan model yang digunakan dalam penelitian
 \section{\emph{Preprocessing} Data}
 \label{subsec: bab4-preprocessing-data}
 
+Dataset yang digunakan dalam penelitian ini diperoleh dari MIT-BIH Arrhythmia Database.
+Sebelum data dapat digunakan untuk pelatihan model, data ECG harus melalui tahap \textit{preprocessing}.
 \textit{Preprocessing} dilakukan untuk memastikan kualitas dan keandalan data yang digunakan dalam proses pelatihan model. 
-Terdapat beberapa tahap \textit{preprocessing} yang dilakukan pada penelitian ini, yaitu penghapusan \textit{noise} berfrekuensi tinggi, penghapusan \textit{baseline wander} (BW), dan normalisasi.
-Data ECG 
+Terdapat beberapa tahap \textit{preprocessing} yang dilakukan pada penelitian ini, yaitu pemetaan dataset, penghapusan \textit{noise} berfrekuensi tinggi, penghapusan \textit{baseline wander} (BW), dan normalisasi.
+
+Data ECG pada MIT-BIH Arrhythmia Database memiliki anotasi yang terdiri dari 20 kelas, sedangkan pada penelitian ini hanya menggunakan 5 kelas yaitu Normal (N), \textit{Supraventricular Ectopic Beat} (S), \textit{Ventricular Ectopic Beat} (V), \textit{Fusion} (F), dan \textit{Unknown} (Q).
+Kelas-kelas tersebut dipilih berdasarkan rekomendasi dari Association for the Advancement of Medical Instrumentation (AAMI), yang mengelompokkan berbagai jenis aritmia ke dalam kategori yang lebih umum.
+Oleh karena itu, perlu dilakukan pemetaan kelas pada dataset agar sesuai dengan kelas yang digunakan pada penelitian ini.
+Pemetaan tersebut dapat dilihat pada Tabel \ref{tab:aami-label}, yang menunjukkan bagaimana kelas-kelas dari dataset dipetakan ke dalam 5 kelas yang digunakan dalam penelitian ini.
+
+\begin{table}[h]
+	\caption{Kelas Rekomendasi AAMI dan Simbol pada MIT-BIH}
+	\begin{center}
+		\begin{tabular}{c @{\hspace{1cm}} c}
+			\hline
+			AAMI                              & MIT-BIH       \\
+			\hline
+			Normal (N)                        & N, L, R, e, j \\
+                        \textit{Supraventricular Ectopic Beat} (S) & A, a, J, S    \\
+                        \textit{Ventricular Ectopic Beat} (V)      & V, E          \\
+                        \textit{Fusion} (F)                        & F             \\
+                        \textit{Unknown} (Q)                       & /, f, Q       \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\label{tab:aami-label}
+\end{table}
+
 % metode penghilangan frekuensi tinggi
 %     ecg = denoise_wavelet(ecg, method='VisuShrink', mode='soft', wavelet_levels=10, wavelet='db8', rescale_sigma='True')
 
