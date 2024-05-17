@@ -54,8 +54,19 @@ Pemetaan tersebut dapat dilihat pada Tabel \ref{tab:aami-label}, yang menunjukka
 % metode penghilangan frekuensi tinggi
 %     ecg = denoise_wavelet(ecg, method='VisuShrink', mode='soft', wavelet_levels=10, wavelet='db8', rescale_sigma='True')
 
+Selama proses pengambilan data, sinyal ECG dapat terganggu oleh \textit{noise} berfrekuensi tinggi.
 Frekuensi tinggi pada data ECG dapat dianggap sebagai \textit{noise} yang dapat mengganggu proses klasifikasi detak jantung.
-\textit{Noise} tersebut dapat dihilangkan dengan menggunakan metode \textit{wavelet denoise}
+Oleh karena itu, perlu dilakukan penghilangan \textit{noise} berfrekuensi tinggi pada data ECG.
+Pada penelitian ini, \textit{noise} berfrekuensi tinggi dihilangkan dengan menggunakan metode \textit{wavelet denoise}.
+\textit{Wavelet denoise} merupakan metode yang digunakan untuk menghilangkan \textit{noise} pada sinyal maupun gambar dengan menggunakan \textit{wavelet transform}.
+\textit{Wavelet transform} memungkinkan sinyal untuk dipecah menjadi beberapa bagian frekuensi yang berbeda, sehingga memungkinkan penghilangan \textit{noise} pada frekuensi tertentu.
+Metode \textit{wavelet denoise} yang digunakan pada penelitian ini adalah \textit{VisuShrink} dengan mode \textit{soft thresholding}, dan menggunakan \textit{wavelet} Daubechies 8 (db8) dengan 10 level \textit{wavelet decomposition}.
+
+--- dijelaskan lebih detail ? ---
+
+% Sinyal ECG diubah ke dalam domain \textit{wavelet} dengan menggunakan \textit{wavelet transform}.
+% \textit{Noise} pada sinyal ECG kemudian dapat dihilangkan dengan menghilangkan koefisien \textit{wavelet} yang memiliki nilai kecil.
+
 
 Setelah menghilangkan \textit{noise} berfrekuensi tinggi, tahap selanjutnya adalah menghilangkan \textit{baseline wander} (BW).
 % elaborate

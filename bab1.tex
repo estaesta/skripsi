@@ -58,10 +58,11 @@ Hal ini membuat LSTM cocok digunakan untuk memprediksi detak jantung yang merupa
 % edge device?
 % Penelitian tentang implementasi model prediksi detak jantung pada perangkat tepi juga mulai banyak dilakukan.
 % Perangkat tepi (\emph{edge device}) merupakan perangkat yang memiliki kemampuan komputasi dan penyimpanan data yang terbatas.
-
+Salah satu tantangan dalam implementasi model prediksi detak jantung adalah efisiensi dalam melakukan inferensi.
 Inferensi merupakan proses penggunaan model yang telah dilatih untuk memprediksi data baru. 
 Efisiensi inferensi sangat penting untuk memungkinkan penggunaan model pada perangkat yang luas \parencite{ulkerReviewingInferencePerformance2020}. 
 Pengujian performa inferensi pada beberapa perangkat dapat memberikan informasi mengenai efisiensi model tersebut pada perangkat yang berbeda-beda.
+Model dengan performa inferensi yang baik dapat digunakan pada perangkat yang memiliki keterbatasan daya komputasi serta memberikan pengalaman pengguna yang lebih baik karena waktu inferensi yang lebih cepat.
 Oleh karena itu, penting untuk melakukan evaluasi performa model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
 
 Berdasarkan latar belakang di atas, pada penelitian ini akan dikembangkan dan diimplementasikan model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
@@ -84,8 +85,8 @@ Berdasarkan latar belakang di atas maka dilakukan penyusunan rumusan masalah seb
   % \item Bagaimana mengembangkan dan mengimplementasikan model prediksi detak jantung berbasis LSTM pada Raspberry Pi.
   % \item Bagaimana hasil evaluasi model prediksi detak jantung berbasis LSTM pada Raspberry Pi.
   \item Bagaimana nilai akurasi, presisi, \emph{recall}, dan \emph{F1-score} dari model prediksi detak jantung berbasis LSTM.
-  % \item Bagaimana waktu inferensi serta penggunaan memori dari model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
-  \item Bagaimana efisiensi inferensi model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
+  \item Bagaimana waktu inferensi serta penggunaan memori dari model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
+  % \item Bagaimana efisiensi inferensi model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
 \end{enumerate}
 
 
@@ -96,8 +97,8 @@ Tujuan dilakukannya penelitian ini adalah sebagai berikut:
   % \item Mengembangkan dan mengimplementasikan model prediksi detak jantung berbasis LSTM pada Raspberry Pi.
   % \item Melakukan evaluasi model prediksi detak jantung berbasis LSTM pada Raspberry Pi.
   \item Mengetahui nilai akurasi, presisi, \emph{recall}, dan \emph{F1-score} dari model prediksi detak jantung berbasis LSTM.
-  % \item Mengetahui waktu inferensi serta penggunaan memori dari model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
-  \item Mengetahui efisiensi inferensi model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
+  \item Mengetahui waktu inferensi serta penggunaan memori dari model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
+  % \item Mengetahui efisiensi inferensi model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
 \end{enumerate}
 
 
