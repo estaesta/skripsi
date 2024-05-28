@@ -54,24 +54,27 @@ Pemetaan tersebut dapat dilihat pada Tabel \ref{tab:aami-label}, yang menunjukka
 % metode penghilangan frekuensi tinggi
 %     ecg = denoise_wavelet(ecg, method='VisuShrink', mode='soft', wavelet_levels=10, wavelet='db8', rescale_sigma='True')
 
-Selama proses pengambilan data, sinyal ECG dapat terganggu oleh \textit{noise} berfrekuensi tinggi.
-Frekuensi tinggi pada data ECG dapat dianggap sebagai \textit{noise} yang dapat mengganggu proses klasifikasi detak jantung.
-Oleh karena itu, perlu dilakukan penghilangan \textit{noise} berfrekuensi tinggi pada data ECG.
+% Selama proses pengambilan data, sinyal ECG dapat terganggu oleh \textit{noise} berfrekuensi tinggi.
+Selama proses pengambilan data, sinyal ECG rentan terhadap \textit{noise} berfrekuensi tinggi.
+% Frekuensi tinggi pada data ECG dianggap sebagai \textit{noise} yang dapat mengganggu proses klasifikasi detak jantung.
+% Oleh karena itu, perlu dilakukan penghilangan \textit{noise} berfrekuensi tinggi pada data ECG.
+Frekuensi tinggi pada data ECG dianggap sebagai \textit{noise} yang dapat mengganggu proses klasifikasi detak jantung, sehingga perlu dilakukan penghilangan \textit{noise} tersebut.
 Pada penelitian ini, \textit{noise} berfrekuensi tinggi dihilangkan dengan menggunakan metode \textit{wavelet denoise}.
 \textit{Wavelet denoise} merupakan metode yang digunakan untuk menghilangkan \textit{noise} pada sinyal maupun gambar dengan menggunakan \textit{wavelet transform}.
 \textit{Wavelet transform} memungkinkan sinyal untuk dipecah menjadi beberapa bagian frekuensi yang berbeda, sehingga memungkinkan penghilangan \textit{noise} pada frekuensi tertentu.
 Metode \textit{wavelet denoise} yang digunakan pada penelitian ini adalah \textit{VisuShrink} dengan mode \textit{soft thresholding}, dan menggunakan \textit{wavelet} Daubechies 8 (db8) dengan 10 level \textit{wavelet decomposition}.
 
---- dijelaskan lebih detail ? ---
+% --- dijelaskan lebih detail? ---
 
-% Sinyal ECG diubah ke dalam domain \textit{wavelet} dengan menggunakan \textit{wavelet transform}.
-% \textit{Noise} pada sinyal ECG kemudian dapat dihilangkan dengan menghilangkan koefisien \textit{wavelet} yang memiliki nilai kecil.
+% Sinyal ECG diubah ke dalam domain \textit{wavelet} dengan menggunakan \textit{wavelet transform} Daubechies 8 (db8) dengan 10 level \textit{wavelet decomposition}.
+% \textit{Noise} pada sinyal ECG kemudian dapat dihilangkan dengan mengurangi koefisien \textit{wavelet} yang memiliki nilai di bawah ambang batas tertentu.
 
-
-Setelah menghilangkan \textit{noise} berfrekuensi tinggi, tahap selanjutnya adalah menghilangkan \textit{baseline wander} (BW).
+%
+% Setelah menghilangkan \textit{noise} berfrekuensi tinggi, tahap selanjutnya adalah menghilangkan \textit{baseline wander} (BW).
 % elaborate
-
-\textit{Baseline wander} atau BW merupakan \textit{noise} berfrekuensi rendah yang terdapat pada ECG.
+Selain \textit{noise} berfrekuensi tinggi, sinyal ECG juga rentan terhadap
+baseline wander.
+\textit{Baseline wander} (BW) merupakan \textit{noise} berfrekuensi rendah yang terdapat pada ECG.
 BW dapat disebabkan oleh beberapa faktor, seperti pernapasan, elektroda yang bermuatan listrik, dan gerakan dari pasien \parencite{lenisComparisonBaselineWander2017}.
 % metode baseline wander
         % baseline = medfilt(ecg, 71)
@@ -81,7 +84,6 @@ BW dapat disebabkan oleh beberapa faktor, seperti pernapasan, elektroda yang ber
         % for i in range(0, len(ecg)):
         %     ecg[i] = ecg[i] - baseline[i]
 % BW dihilangkan dengan menggunakan metode \textit{median filter} dengan panjang jendela 71 dan 215.
-
 BW dihilangkan dengan melakukan substraksi antara sinyal ECG dengan \textit{trend} sinyal.
 \textit{Trend} sinyal diperoleh dengan menggunakan metode \textit{median filter} sebanyak dua kali dengan panjang jendela 71 dan 215.
 % Median filtering, as mentioned earlier, is another method commonly used for baseline wander removal. It involves replacing each data point in the signal with the median value within a specified window around that point. This approach can effectively remove baseline variations while preserving the shape of the ECG waveform.
@@ -92,12 +94,30 @@ BW dihilangkan dengan melakukan substraksi antara sinyal ECG dengan \textit{tren
     y[n] = \text{median}(x[n - \frac{M}{2} : n + \frac{M}{2}])
     \label{eq:median-filter}
 \end{equation}
-Dimana $y[n]$ adalah sinyal hasil \textit{median filter}, $x[n]$ adalah sinyal asli, dan $M$ adalah panjang jendela \textit{median filter}.
-Setelah \textit{baseline wander} dihilangkan, data dinormalisasi untuk menghindari perbedaan skala.
-Normalisasi yang dilakukan yaitu \textit{Z-score normalization}.
-% metode normalisasi
+Yang mana $y[n]$ adalah sinyal hasil \textit{median filter}, $x[n]$ adalah sinyal asli, dan $M$ adalah panjang jendela \textit{median filter}.
 
-Gambar \ref{fig:sebelum-prep} menunjukkan data sebelum dilakukan \textit{preprocessing}, sedangkan Gambar \ref{fig:setelah-prep} menunjukkan data setelah dilakukan \textit{preprocressing}.
+% Setelah \textit{baseline wander} dihilangkan, data dinormalisasi untuk menghindari perbedaan skala.
+% Setelah \textit{nose} dan \textit{baseline wander} dihilangkan, data dinormalisasi untuk menghindari perbedaan skala.
+% Normalisasi yang dilakukan yaitu \textit{Z-score normalization}.
+% metode normalisasi
+Setelah \textit{noise} dan \textit{baseline wander} dihilangkan, tahap selanjutnya adalah normalisasi data.
+Normalisasi dilakukan untuk menghindari adanya perbedaan skala pada data.
+Metode normalisasi yang digunakan pada penelitian ini adalah \textit{Z-score normalization}.
+\textit{Z-score normalization} mengubah data ke dalam distribusi normal dengan rata-rata 0 dan standar deviasi 1.
+\textit{Z-score normalization} didefinisikan oleh persamaan \ref{eq:z-score}.
+\begin{equation}
+		z = \frac{x - \mu}{\sigma}
+		\label{eq:z-score}
+\end{equation}
+Yang mana $z$ adalah data yang telah dinormalisasi, $x$ adalah data asli, $\mu$ adalah rata-rata data, dan $\sigma$ adalah standar deviasi data.
+
+
+% Gambar \ref{fig:sebelum-prep} menunjukkan data sebelum dilakukan \textit{preprocessing}, sedangkan Gambar \ref{fig:setelah-prep} menunjukkan data setelah dilakukan \textit{preprocressing}.
+Gambar \ref{fig:sebelum-prep} dan \ref{fig:setelah-prep} memperlihatkan perbandingan data ECG sebelum dan setelah dilakukan \textit{preprocessing}.
+% Pada Gambar \ref{fig:sebelum-prep}, terlihat bahwa terdapat \textit{noise} berfrekuensi tinggi dan variasi pada \textit{baseline} sinyal ECG.
+Pada Gambar \ref{fig:sebelum-prep}, terlihat bahwa data ECG masih mengandung gangguan seperti \textit{noise} berfrekuensi tinggi dan variasi pada \textit{baseline} sinyal.
+% Setelah dilakukan \textit{preprocessing}, sinyal ECG menjadi lebih halus dan memiliki baseline yang lebih rata.
+Setelah dilakukan \textit{preprocessing}, sinyal ECG menjadi lebih halus dan memiliki \textit{baseline} yang lebih rata, seperti yang terlihat pada Gambar \ref{fig:setelah-prep}.
 
 \begin{figure}[H]
     \centering
