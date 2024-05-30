@@ -28,10 +28,33 @@ Penelitian ini dilakukan dengan beberapa tahapan, yaitu studi literatur, pembuat
 % - Tujuan studi literatur
 % - Metode studi literatur: 
 
-Studi literatur dilakukan untuk memperdalam pengetahuan penulis terkait dengan implementasi model LSTM pada klasifikasi detak jantung.
+Studi literatur dilakukan untuk memperdalam pengetahuan penulis terkait implementasi model LSTM untuk klasifikasi detak jantung.
 % Studi literatur dilakukan dengan cara mencari dasar teori terkait dengan implementasi model LSTM pada klasifikasi detak jantung, serta melakukan \textit{review} terhadap penelitian-penelitian terdahulu yang berkaitan dengan klasifikasi detak jantung menggunakan sinyal ECG.
-Studi literatur dilakukan dengan mencari dasar teori dan melakukan \textit{review} terhadap penelitian-penelitian terdahulu yang berkaitan dengan klasifikasi detak jantung menggunakan sinyal ECG.
+% Studi literatur dilakukan dengan mencari dasar teori dan melakukan \textit{review} terhadap penelitian-penelitian terdahulu yang berkaitan dengan klasifikasi detak jantung menggunakan sinyal ECG.
+Studi literatur ini dilakukan dengan cara meninjau beberapa penelitian terdahulu dan mencari dasar teori yang berkaitan dengan implementasi model LSTM untuk klasifikasi detak jantung.
 Sumber literatur yang digunakan dalam penelitian ini meliputi jurnal ilmiah, konferensi, serta dokumentasi resmi.
+Dasar teori yang relevan dengan penelitian ini berkaitan dengan detak jantung, sinyal ECG, dan model LSTM.
+Dasar teori tersebut antara lain:
+\begin{enumerate}
+	\item Detak jantung
+
+		Dasar teori mengenai detak jantung diperlukan untuk memahami karakteristik detak jantung normal dan abnormal, serta faktor-faktor yang mempengaruhi detak jantung.
+		Informasi ini penting untuk memastikan bahwa model klasifikasi yang dikembangkan mampu membedakan dengan tepat antara berbagai jenis detak jantung.
+		
+	\item Sinyal ECG
+
+		Studi literatur mengenai sinyal ECG diperlukan untuk memahami apa itu sinyal ECG dan bagaimana sinyal ECG dapat digunakan dalam klasifikasi detak jantung.
+		Hal-hal yang perlu dipahami antara lain karakteristik sinyal ECG, proses perekaman sinyal ECG, serta bagaimana sinyal ECG dapat digunakan dalam klasifikasi detak jantung.
+
+	\item Model LSTM
+
+		Dasar teori dari LSTM diperlukan untuk mendapatkan pemahaman komprehensif terkait dengan model LSTM.
+		Dari studi literatur terkait LSTM ini, akan didapatkan informasi mengenai karakteristik LSTM, cara kerja LSTM, serta bagaimana LSTM dapat diterapkan dalam analisis data time-series.
+		Informasi ini akan menjadi acuan untuk mengimplementasikan LSTM dalam klasifikasi detak jantung.
+
+\end{enumerate}
+
+
 
 % Pada tahap ini, dilakukan studi literatur dengan cara melakukan \textit{review}
 % terhadap penelitian-penelitian terdahulu yang berkaitan dengan klasifikasi detak jantung menggunakan ECG
@@ -75,12 +98,35 @@ Sumber literatur yang digunakan dalam penelitian ini meliputi jurnal ilmiah, kon
 % % 	\label{tab:aami-label}
 % % \end{table}
 
-\section{Pembuatan Model}
+% \section{Pembuatan Model}
+\section{Perancangan Model}
 \label{subsec: metodologi-pembuatan-model}
-Pada tahap ini, dilakukan pembuatan model yang akan digunakan untuk melakukan klasifikasi detak jantung.
-Model dibuat untuk dapat mengklasifikasikan detak jantung menjadi 5 kelas, yaitu Normal (N), \textit{Supraventricular Ectopic Beat} (S), \textit{Ventricular Ectopic Beat} (V), \textit{Fusion} (F), dan \textit{Unknown} (Q) sesuai dengan rekomendasi AAMI \parencite{associationfortheadvancementofmedicalinstrumentationTestingReportingPerformance1998}
+Pada tahap ini, dilakukan perancangan model yang akan digunakan untuk melakukan klasifikasi detak jantung.
+Model dirancang untuk dapat melakukan klasifikasi detak jantung menjadi 5 kelas, yaitu Normal (N), \textit{Supraventricular Ectopic Beat} (S), \textit{Ventricular Ectopic Beat} (V), \textit{Fusion} (F), dan \textit{Unknown} (Q) sesuai dengan rekomendasi AAMI \parencite{associationfortheadvancementofmedicalinstrumentationTestingReportingPerformance1998}
 Terdapat tiga jenis model yang akan digunakan pada penelitian ini, yaitu LSTM, Bi-LSTM, dan LSTM-FCN.
-Pembuatan model meliputi \textit{preprocessing} data, ekstraksi fitur, pelatihan model, dan evaluasi model.
+% Pembuatan model meliputi \textit{preprocessing} data, ekstraksi fitur, pelatihan model, dan evaluasi model.
+
+\section{Pelatihan Model}
+\label{subsec: metodologi-pelatihan-model}
+% - Parameter pelatihan
+% - Metode pelatihan
+Pada tahap ini, dilakukan pelatihan model LSTM, Bi-LSTM, dan LSTM-FCN menggunakan data ECG yang telah diproses.
+Pelatihan model dilakukan dengan menggunakan bantuan \textit{framework} TensorFlow.
+Sebelum dilakukan pelatihan, data ECG yang digunakan akan dipisahkan menjadi data latih dan data uji dengan perbandingan 70:30.
+Pemisahan data ini dilakukan untuk memastikan bahwa model yang dibuat mampu menggeneralisasi data dengan baik.
+
+% Proses pelatihan mencakup beberapa langkah utama, yaitu normalisasi data, pembentukan batch, dan optimasi hiperparameter.
+% Model dilatih menggunakan algoritma optimasi seperti Adam dengan berbagai konfigurasi laju pembelajaran.
+Selama proses pelatihan, terdapat beberapa hiperparameter yang perlu diatur, seperti jumlah \textit{epoch}, ukuran \textit{batch}, dan \textit{learning rate}.
+%tidak ada optimasi hiperparameter, hiperparameter sudah ditentukan di awal
+Hiperparameter yang digunakan antara lain jumlah \textit{epoch} sebanyak 50, ukuran \textit{batch} 256, dan \textit{learning rate} sebesar 0.001.
+Evaluasi performa model dilakukan menggunakan metrik akurasi, presisi, recall, dan F1-score untuk setiap model.
+Hasil evaluasi ini kemudian dianalisis untuk menentukan model yang paling baik untuk klasifikasi detak jantung.
+
+% \section{Evaluasi Model}
+% \label{subsec: metodologi-evaluasi-model}
+% - Metode evaluasi
+% - Metrik evaluasi
 
 \section{Implementasi dan Pengujian Inferensi}
 \label{subsec: metodologi-implementasi}
