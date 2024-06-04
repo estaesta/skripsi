@@ -102,8 +102,16 @@ Dasar teori tersebut antara lain:
 \section{Perancangan Model}
 \label{subsec: metodologi-pembuatan-model}
 Pada tahap ini, dilakukan perancangan model yang akan digunakan untuk melakukan klasifikasi detak jantung.
-Model dirancang untuk dapat melakukan klasifikasi detak jantung menjadi 5 kelas, yaitu Normal (N), \textit{Supraventricular Ectopic Beat} (S), \textit{Ventricular Ectopic Beat} (V), \textit{Fusion} (F), dan \textit{Unknown} (Q) sesuai dengan rekomendasi AAMI \parencite{associationfortheadvancementofmedicalinstrumentationTestingReportingPerformance1998}
+Model dirancang untuk dapat melakukan klasifikasi detak jantung menjadi 5 kelas, yaitu Normal (N), \textit{Supraventricular Ectopic Beat} (S), \textit{Ventricular Ectopic Beat} (V), \textit{Fusion} (F), dan \textit{Unknown} (Q) sesuai dengan rekomendasi AAMI \parencite{associationfortheadvancementofmedicalinstrumentationTestingReportingPerformance1998}.
 Terdapat tiga jenis model yang akan digunakan pada penelitian ini, yaitu LSTM, Bi-LSTM, dan LSTM-FCN.
+LSTM dan Bi-LSTM merupakan varian dari Recurrent Neural Network (RNN) yang mampu menangani data \textit{time-series} seperti sinyal ECG, sedangkan LSTM-FCN menggabungkan LSTM dengan Convolutional Neural Network (CNN) 
+% untuk menangkap fitur temporal dan spasial secara lebih efektif.
+untuk dapat mengekstraksi fitur dengan lebih baik.
+% Pada versi original, untuk menghindari \textit{overfitting}, terdapat \textit{dimension shuffle} yang akan mengacak input sebelum blok LSTM. Akan tetapi, meletakkan \textit{dimension shuffle} sebelum blok LSTM akan menyebabkan hilangnya informasi pada dimensi waktu \parencite{8713870}. Pada penelitian ini kami melakukan modifikasi pada LSTM-FCN dengan menukar posisi \textit{dimension shuffle} pada sebelum blok \textit{convolutional}.
+
+Pada model LSTM-FCN terdapat \textit{layer dimension shuffle} yang digunakan untuk mengurangi \textit{overfitting}.
+Akan tetapi, meletakkan \textit{layer dimension shuffle} sebelum blok LSTM akan menyebabkan hilangnya informasi pada dimensi waktu \parencite{8713870}.
+Oleh karena itu, pada penelitian ini dilakukan modifikasi pada LSTM-FCN dengan menukar posisi \textit{layer dimension shuffle} pada sebelum blok \textit{convolutional}.
 % Pembuatan model meliputi \textit{preprocessing} data, ekstraksi fitur, pelatihan model, dan evaluasi model.
 
 \section{Pelatihan Model}
@@ -121,7 +129,7 @@ Selama proses pelatihan, terdapat beberapa hiperparameter yang perlu diatur, sep
 %tidak ada optimasi hiperparameter, hiperparameter sudah ditentukan di awal
 Hiperparameter yang digunakan antara lain jumlah \textit{epoch} sebanyak 50, ukuran \textit{batch} 256, dan \textit{learning rate} sebesar 0.001.
 Evaluasi performa model dilakukan menggunakan metrik akurasi, presisi, recall, dan F1-score untuk setiap model.
-Hasil evaluasi ini kemudian dianalisis untuk menentukan model yang paling baik untuk klasifikasi detak jantung.
+% Hasil evaluasi ini kemudian dianalisis untuk menentukan model yang paling baik untuk klasifikasi detak jantung.
 
 % \section{Evaluasi Model}
 % \label{subsec: metodologi-evaluasi-model}
