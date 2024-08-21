@@ -1,0 +1,60 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BAB 7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\mychapter{7}{BAB 7 PENUTUP}
+
+\section{Kesimpulan}
+Berdasarkan hasil penelitian tentang evaluasi performa model klasifikasi detak jantung berbasis LSTM pada perangkat tepi yang telah dilakukan, dapat diambil kesimpulan sebagai berikut:
+% make the numbering no indent
+\begin{enumerate}[leftmargin=0.5cm]
+  \item Model klasifikasi detak jantung berbasis LSTM yang dikembangkan mampu mengklasifikasikan detak jantung dengan baik dan akurat, dengan nilai akurasi, presisi, \emph{recall}, dan \emph{F1-score} tertinggi masing-masing sebesar 0,9679, 0,9662, 0,9679, dan 0,9652, yang diperoleh oleh model LSTM-512.
+  % tentang evaluasi performa inferensi
+  \item Evaluasi performa inferensi model klasifikasi detak jantung berbasis LSTM pada perangkat tepi menunjukkan hasil yang baik dengan uraian sebagai berikut:
+    % TODO: perjelas. jangan hanya angka, berikan penjelasan
+    % model kecepatan baik, seluruh di bawah 20ms
+    % model memori baik, seluruh di bawah 200MB
+  \begin{enumerate}
+    \item Model LSTM-512, LSTM-256, BiLSTM, dan LSTM-FCN mampu menghasilkan waktu inferensi yang baik, dengan waktu inferensi di bawah 20 ms per detak jantung.
+    % \item Model LSTM-FCN menghasilkan waktu inferensi tercepat senilai 12.0372 ms per detak jantung pada perangkat tepi Raspberry Pi 4 Model B.
+% LSTM-512       & 15.8634                   \\
+% LSTM-256       & 13.6235                   \\
+% BiLSTM         & 14.3540                   \\
+% LSTM-FCN       & \textbf{12.0372}                   \\ \hline
+    % \item Pada perangkat tepi Raspberry Pi 4 Model B, model LSTM-FCN menghasilkan waktu inferensi tercepat senilai 12.0372 ms per detak jantung
+      % , diikuti oleh model LSTM-256 dengan waktu inferensi 13.6235 ms per detak jantung, model BiLSTM dengan waktu inferensi 14.3540 ms per detak jantung, dan model LSTM-512 dengan waktu inferensi 15.8634 ms per detak jantung.
+% \textbf{Model} & \textbf{Waktu Inferensi per Detak Jantung (ms)} \\ \hline
+% LSTM-512       & 3.9189                   \\
+% LSTM-256       & 2.9050                   \\
+% BiLSTM         & 3.3193                   \\
+% LSTM-FCN       & \textbf{2.8435}                   \\ \hline
+    % \item Pada perangkat tepi Intel NUC, model LSTM-FNC menghasilkan waktu inferensi tercepat senilai 2.8435 ms per detak jantung
+    \item Model LSTM-FCN menghasilkan waktu inferensi tercepat baik pada perangkat tepi Raspberry Pi 4 Model B maupun Intel NUC, dengan waktu inferensi masing-masing sebesar 12,0372 ms dan 2,8435 ms per detak jantung.
+      % , diikuti oleh model LSTM-256 dengan waktu inferensi 2.9050 ms per detak jantung, model BiLSTM dengan waktu inferensi 3.3193 ms per detak jantung, dan model LSTM-512 dengan waktu inferensi 3.9189 ms per detak jantung.
+    \item Model LSTM-512, LSTM-256, BiLSTM, dan LSTM-FCN memiliki penggunaan memori yang baik, dengan penggunaan memori di bawah 200MB.
+    % \item Penggunaan memori antara model LSTM-512, LSTM-256, BiLSTM, dan LSTM-FCN pada perangkat tepi Raspberry Pi 4 Model B dan Intel NUC tidak menunjukkan perbedaan yang signifikan.
+    \item Penggunaan memori model LSTM-512, LSTM-256, BiLSTM, dan LSTM-FCN tidak menunjukkan perbedaan yang signifikan.
+    % \item Penggunaan memori pada perangkat tepi Raspberry Pi 4 Model B untuk melakukan inferensi data ECG dengan durasi 10 detik, 1 menit, dan 10 menit masing-masing sekitar 131MB, 134MB, dan 180MB.
+    % \item Penggunaan memori pada perangkat tepi Intel NUC untuk melakukan inferensi data ECG dengan durasi 10 detik, 1 menit, dan 10 menit masing-masing sekitar 133MB, 136MB, dan 182MB.
+    \item Penggunaan memori untuk melakukan inferensi data ECG dengan durasi 10 detik, 1 menit, dan 10 menit pada perangkat tepi Raspberry Pi 4 Model B masing-masing sekitar 131MB, 134MB, dan 180MB, sedangkan pada perangkat tepi Intel NUC masing-masing sekitar 133MB, 136MB, dan 182MB.
+  \end{enumerate}
+\end{enumerate}
+
+\section{Saran}
+Berdasarkan penelitian yang telah dilakukan, terdapat beberapa saran yang dapat diberikan untuk pengembangan penelitian selanjutnya, yaitu:
+\begin{enumerate}[leftmargin=0.5cm]
+  \item Dapat dilakukan pengujian inferensi secara \textit{real-time} untuk dapat mengetahui apakah model dapat digunakan untuk aplikasi pemantauan detak jantung secara langsung.
+  % \item Dapat dilakukan optimasi model untuk dapat diimplementasikan pada perangkat tepi dengan daya komputasi yang lebih rendah.
+  %perjelas optimasi -> optimasi apa? arsitektur, parameter, kuantisasi, pruning.
+  % \item Dapat dilakukan optimasi model baik dengan melakukan optimasi arsitektur dan parameter model, maupun dengan melakukan kuantisasi dan \emph{pruning} model untuk dapat mencapai performa inferensi yang lebih baik.
+  \item Dapat dilakukan optimasi model baik dari segi arsitektur maupun parameter model untuk dapat mencapai performa inferensi yang lebih baik.
+  % \item Dapat dilakukan pengujian performa inferensi pada perangkat tepi lainnya, seperti Arduino, Jetson Nano, dan sebagainya.
+  % \item Hasil prediksi detak jantung yang dihasilkan oleh model dapat dilakukan validasi lebih lanjut oleh tenaga medis.
+  \item Dapat dilakukan validasi hasil prediksi detak jantung yang dihasilkan oleh model oleh tenaga medis untuk mengetahui keakuratan model pada kasus dunia nyata.
+    %integrasi dengan sistem yang lebih kompleks
+  % \item Dapat dilakukan integrasi model dengan sistem yang lebih kompleks, seperti sistem pemantauan detak jantung yang terhubung dengan sistem informasi rumah sakit.
+\end{enumerate}

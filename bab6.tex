@@ -1,0 +1,487 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BAB 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\mychapter{6}{BAB 6 HASIL DAN PEMBAHASAN}
+
+
+
+% --- hasil evaluasi akurasi, presisi, recall, dan f1 score ---
+Hasil evaluasi akurasi, presisi, recall, dan f1 score dari model LSTM-512, LSTM-256, BiLSTM, dan LSTM-FCN ditunjukkan pada Tabel \ref{tab:evaluasi}.
+% Dari hasil evaluasi, seluruh model mampu melakukan klasifikasi dengan akurasi di atas 0.96.
+Dari hasil evaluasi, model LSTM-512 memiliki akurasi, presisi, recall, dan f1 score tertinggi dibandingkan dengan model LSTM-256, BiLSTM, dan LSTM-FCN.
+Model LSTM-512 memiliki akurasi sebesar 0,9679, presisi sebesar 0,9662, recall sebesar 0,9679, dan f1 score sebesar 0,9652.
+Meskipun demikian, model LSTM-256, BiLSTM, dan LSTM-FCN juga mendapatkan hasil evaluasi yang baik dengan akurasi, presisi, recall, dan f1 score di atas 0,96.
+Akurasi, presisi, recall, dan f1 score pada seluruh model memiliki selisih yang tidak signifikan dengan selisih maksimal sebesar 0,0046.
+
+\begin{table}[H]
+  \centering
+  \caption{Hasil evaluasi akurasi, presisi, recall, dan f1 score}
+  \label{tab:evaluasi}
+  % \begin{tabular}{|c|c|c|c|c|}
+  \begin{tabularx}{0.8\textwidth}{
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X|}
+    \hline
+    \textbf{Model} & \textbf{Akurasi} & \textbf{Presisi} & \textbf{Recall} & \textbf{F1 Score} \\ \hline
+    LSTM-512       & \textbf{0,9679}           & \textbf{0,9662}          & \textbf{0,9679}         & \textbf{0,9652}           \\ 
+    \hline
+    LSTM-256       & 0,9674           & 0,9656          & 0,9674         & 0,9645           \\ 
+    \hline
+    BiLSTM         & 0,9636           & 0,9617          & 0,9636         & 0,9606           \\ 
+    \hline
+    LSTM-FCN       & 0,9667           & 0,9643          & 0,9667         & 0,9643           \\ \hline
+  \end{tabularx}
+\end{table}
+
+% --- confussion matrix ---
+Hasil evaluasi berupa \textit{confusion matrix} dari model LSTM-512, LSTM-256, BiLSTM, dan LSTM-FCN ditunjukkan pada Tabel \ref{tab:confusion-lstm512}, Tabel \ref{tab:confusion-lstm256}, Tabel \ref{tab:confusion-bilstm}, dan Tabel \ref{tab:confusion-lstmfcn}.
+Dari hasil \textit{confusion matrix}, dapat dilihat bahwa model LSTM-512, LSTM-256, BiLSTM, dan LSTM-FCN memiliki kemampuan yang baik dalam melakukan klasifikasi detak jantung normal (N).
+Akan tetapi, model LSTM-512, LSTM-256, BiLSTM, dan LSTM-FCN memiliki kesulitan dalam melakukan klasifikasi detak jantung jenis lain terutama detak jantung \textit{fusion} (F) dan detak jantung \textit{unknown} (Q).
+Hal ini dapat dilihat dari rasio misklasifikasi pada detak jantung \textit{fusion} (F) dan detak jantung \textit{unknown} (Q) yang cukup tinggi dibandingkan dengan detak jantung lainnya.
+% model cendurung mengklasifikasikan ke kelas n yang menunjukkan overfitting ke kelas n
+Ketika model melakukan kesalahan klasifikasi, model cenderung mengklasifikasikan detak jantung ke kelas normal (N) yang menunjukkan adanya overfitting ke kelas normal (N).
+Hal ini dapat disebabkan karena adanya ketidakseimbangan jumlah detak jantung pada masing-masing kelas pada dataset yang digunakan.
+% yang menyebabkan model cenderung mengklasifikasikan detak jantung ke kelas yang mayoritas.
+Ketidakseimbangan tersebut menyebabkan model cenderung mengklasifikasikan detak jantung ke kelas yang mayoritas.
+
+
+\begin{table}[H]
+  \centering
+  \caption{Confusion matrix model LSTM-512}
+  \label{tab:confusion-lstm512}
+  % \begin{tabular}{cc|ccccc}
+  %   \multicolumn{2}{c}{} & \multicolumn{5}{c}{Prediksi} \\
+  %   & & N & S & V & F & Q \\ \hline
+  %   \multirow{5}{*}{\rotatebox[origin=c]{90}{Aktual}}
+  %   & N & 25722 & 25 & 166 & 7 & 0 \\
+  %   & S & 88 & 641 & 79 & 0 & 0 \\
+  %   & V & 335 & 36 & 1581 & 2 & 0 \\
+  %   & F & 183 & 0 & 6 & 47 & 0 \\
+  %   & Q & 1 & 1 & 0 & 0 & 0 \\ \hline
+  % \end{tabular}
+  \begin{tabularx}{0.6\textwidth}{|c
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X|}
+    \hline
+    \multirow{2}{*}{\textbf{Aktual}} & \multicolumn{5}{c|}{\textbf{Prediksi}} \\
+    \cline{2-6}
+               & \textbf{N} & \textbf{S} & \textbf{V} & \textbf{F} & \textbf{Q} \\ \hline
+               \textbf{N} & 25722 & 25 & 166 & 7 & 0 \\
+    \hline
+              \textbf{S} & 88 & 641 & 79 & 0 & 0 \\
+    \hline
+              \textbf{V} & 335 & 36 & 1581 & 2 & 0 \\
+    \hline
+              \textbf{F} & 183 & 0 & 6 & 47 & 0 \\
+    \hline
+              \textbf{Q} & 1 & 1 & 0 & 0 & 0 \\ \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Confusion matrix model LSTM-256}
+  \label{tab:confusion-lstm256}
+  % \begin{tabular}{cc|ccccc}
+  %   \multicolumn{2}{c}{} & \multicolumn{5}{c}{Prediksi} \\
+  %   & & N & S & V & F & Q \\ \hline
+  %   \multirow{5}{*}{\rotatebox[origin=c]{90}{Aktual}}
+  %   & N & 25748 & 24 & 140 & 8 & 0 \\
+  %   & S & 83 & 644 & 81 & 0 & 0 \\
+  %   & V & 360 & 56 & 1538 & 0 & 0 \\
+  %   & F & 182 & 0 & 8 & 46 & 0 \\
+  %   & Q & 1 & 0 & 1 & 0 & 0 \\ \hline
+  % \end{tabular}
+  \begin{tabularx}{0.6\textwidth}{|c
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X|}
+    \hline
+    \multirow{2}{*}{\textbf{Aktual}} & \multicolumn{5}{c|}{\textbf{Prediksi}} \\
+    \cline{2-6}
+               & \textbf{N} & \textbf{S} & \textbf{V} & \textbf{F} & \textbf{Q} \\ \hline
+               \textbf{N} & 25748 & 24 & 140 & 8 & 0 \\
+    \hline
+              \textbf{S} & 83 & 644 & 81 & 0 & 0 \\
+    \hline
+              \textbf{V} & 360 & 56 & 1538 & 0 & 0 \\
+    \hline
+              \textbf{F} & 182 & 0 & 8 & 46 & 0 \\
+    \hline
+              \textbf{Q} & 1 & 0 & 1 & 0 & 0 \\ \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Confusion matrix model BiLSTM}
+  \label{tab:confusion-bilstm}
+  % \begin{tabular}{cc|ccccc}
+  %   \multicolumn{2}{c}{} & \multicolumn{5}{c}{Prediksi} \\
+  %   & & N & S & V & F & Q \\ \hline
+  %   \multirow{5}{*}{\rotatebox[origin=c]{90}{Aktual}}
+  %   & N & 25684 & 40 & 190 & 6 & 0 \\
+  %   & S & 94 & 627 & 87 & 0 & 0 \\
+  %   & V & 397 & 45 & 1511 & 1 & 0 \\
+  %   & F & 183 & 0 & 9 & 44 & 0 \\
+  %   & Q & 1 & 0 & 1 & 0 & 0 \\ \hline
+  % \end{tabular}
+  \begin{tabularx}{0.6\textwidth}{|c
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X|}
+    \hline
+    \multirow{2}{*}{\textbf{Aktual}} & \multicolumn{5}{c|}{\textbf{Prediksi}} \\
+    \cline{2-6}
+               & \textbf{N} & \textbf{S} & \textbf{V} & \textbf{F} & \textbf{Q} \\ \hline
+               \textbf{N} & 25684 & 40 & 190 & 6 & 0 \\
+    \hline
+               \textbf{S} & 94 & 627 & 87 & 0 & 0 \\
+    \hline
+               \textbf{V} & 397 & 45 & 1511 & 1 & 0 \\
+    \hline
+               \textbf{F} & 183 & 0 & 9 & 44 & 0 \\
+    \hline
+               \textbf{Q} & 1 & 0 & 1 & 0 & 0 \\ \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Confusion matrix model LSTM-FCN}
+  \label{tab:confusion-lstmfcn}
+  \begin{tabularx}{0.6\textwidth}{|c
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X
+      |>{\centering\arraybackslash}X|}
+    \hline
+    \multirow{2}{*}{\textbf{Aktual}} & \multicolumn{5}{c|}{\textbf{Prediksi}} \\
+    \cline{2-6}
+               & \textbf{N} & \textbf{S} & \textbf{V} & \textbf{F} & \textbf{Q} \\ \hline
+               \textbf{N} & 25702 & 26 & 171 & 21 & 0 \\
+    \hline
+               \textbf{S} & 98 & 631 & 79 & 0 & 0 \\
+    \hline
+               \textbf{V} & 338 & 43 & 1571 & 2 & 0 \\
+    \hline
+               \textbf{F} & 175 & 0 & 8 & 53 & 0 \\
+    \hline
+               \textbf{Q} & 1 & 0 & 1 & 0 & 0 \\ \hline
+  \end{tabularx}
+\end{table}
+
+% --- analisis hasil evaluasi akurasi, presisi, recall, dan f1 score ---
+
+
+% --- hasil evaluasi waktu inferensi dan memory usage ---
+\begin{table}[H]
+\centering
+\caption{Hasil evaluasi waktu inferensi dan penggunaan memori pada Raspberry Pi 4}
+\label{tab:raspi4}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Model} & \textbf{Durasi ECG} & \textbf{Waktu Inferensi (s)} & \textbf{Penggunaan Memori (MB)} \\ \hline
+\multirow{3}{*}{ LSTM-512 }       & 10s                 & 0,1541                      & 131,1078                   \\ 
+              \cline{2-4}
+               & 1m                  & 1,0411                      & 135,0430                   \\
+              \cline{2-4}
+               & 10m                 & 14,0108                     & 180,4742                   \\ \hline
+\multirow{3}{*}{ LSTM-256 }       & 10s                 & 0,1574                      & 131,0969                   \\ 
+              \cline{2-4}
+               & 1m                  & 0,9454                      & \textbf{134,2883}                   \\ 
+              \cline{2-4}
+               & 10m                 & 11,2050                     & 180,7773                   \\ \hline
+\multirow{3}{*}{ BiLSTM }         & 10s                 & \textbf{0,1467}                      & 131,1070                   \\ 
+              \cline{2-4}
+               & 1m                  & 0,9615                      & 134,3352                   \\ 
+              \cline{2-4}
+               & 10m                 & 12,3639                     & \textbf{180,1117}                   \\ \hline
+\multirow{3}{*}{ LSTM-FCN }       & 10s                 & 0,1916                      & \textbf{131,0898}                   \\
+              \cline{2-4}
+               & 1m                  & \textbf{0,8209}                      & 134,6477                   \\ 
+              \cline{2-4}
+               & 10m                 & \textbf{10,1330}                     & 180,3414                   \\ \hline
+\end{tabular}
+\end{table}
+
+Tabel \ref{tab:raspi4} menunjukkan hasil evaluasi waktu inferensi dan penggunaan memori pada Raspberry Pi 4.
+Pada skenario inferensi menggunakan data dengan durasi 10 detik, model BiLSTM memiliki waktu inferensi tercepat senilai 0,1467 detik.
+Sementara itu, pada skenario inferensi menggunakan data dengan durasi 1 menit dan 10 menit, model LSTM-FCN memiliki waktu inferensi tercepat masing-masing senilai 0,8209 detik dan 10,1330 detik.
+Tidak terdapat perbedaan yang signifikan pada penggunaan memori antara model LSTM-512, LSTM-256, BiLSTM, dan LSTM-FCN pada Raspberry Pi 4.
+Penggunaan memori pada Raspberry Pi 4 pada inferensi menggunakan data dengan durasi 10 detik, 1 menit, dan 10 menit masing-masing sekitar 131 MB, 134 MB, dan 180 MB, dengan selisih kurang dari 1 MB.
+Penggunaan memori tersebut masih dalam batas yang dapat diterima oleh Raspberry Pi 4 yang memiliki memori sebesar 8 GB.
+
+
+\begin{table}[H]
+\centering
+\caption{Hasil evaluasi waktu inferensi dan penggunaan memori pada Intel NUC}
+\label{tab:intelnuc}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Model} & \textbf{Durasi ECG} & \textbf{Waktu Inferensi (s)} & \textbf{Penggunaan Memori (MB)} \\ \hline
+\multirow{3}{*}{ LSTM-512 }       & 10s                 & 0,0360                      & 133,1211                   \\ 
+              \cline{2-4}
+               & 1m                  & 0,2760                      & 136,9086                   \\ 
+              \cline{2-4}
+               & 10m                 & 3,1574                      & \textbf{182,0367}                   \\ \hline
+\multirow{3}{*}{ LSTM-256 }       & 10s                 & \textbf{0,0359}                      & \textbf{132,8539}                   \\
+              \cline{2-4}
+               & 1m                  & \textbf{0,2091}                      & \textbf{136,5195}                   \\ 
+              \cline{2-4}
+               & 10m                 & 2,2683                      & 182,2008                   \\ \hline
+\multirow{3}{*}{ BiLSTM }         & 10s                 & 0,0371                      & 133,7625                   \\
+              \cline{2-4}
+               & 1m                  & 0,2360                      & 136,9438                   \\ 
+              \cline{2-4}
+               & 10m                 & 2,6397                      & 182,1641                   \\ \hline
+\multirow{3}{*}{ LSTM-FCN }       & 10s                 & 0,0367                      & 133,6398                   \\
+              \cline{2-4}
+               & 1m                  & 0,2190                      & 137,0242                   \\
+              \cline{2-4}
+               & 10m                 & \textbf{1,9899}                      & 182,6266                   \\ \hline
+\end{tabular}
+\end{table}
+
+Tabel \ref{tab:intelnuc} menunjukkan hasil evaluasi waktu inferensi dan penggunaan memori pada Intel NUC.
+Pada skenario inferensi menggunakan data dengan durasi 10 detik dan 1 menit, model LSTM-256 memiliki waktu inferensi tercepat masing-masing senilai 0,0359 detik dan 0,2091 detik.
+Sementara itu, pada skenario inferensi menggunakan data dengan durasi 10 menit, model LSTM-FCN memiliki waktu inferensi tercepat senilai 1,9899 detik.
+Tidak terdapat perbedaan yang signifikan pada penggunaan memori antara model LSTM-512, LSTM-256, BiLSTM, dan LSTM-FCN pada Intel NUC.
+Penggunaan memori pada Intel NUC pada inferensi menggunakan data dengan durasi 10 detik, 1 menit, dan 10 menit masing-masing sekitar 133 MB, 136 MB, dan 182 MB, dengan selisih kurang dari 1 MB.
+Penggunaan memori tersebut masih dalam batas yang dapat diterima oleh Intel NUC yang memiliki memori sebesar 16 GB.
+
+Berdasarkan hasil evaluasi waktu inferensi dan penggunaan memori pada Raspberry Pi 4 dan Intel NUC yang ditunjukkan pada Tabel \ref{tab:raspi4} dan Tabel \ref{tab:intelnuc}, dapat dilihat bahwa kecepatan waktu inferensi pada Intel NUC lebih cepat dibandingkan dengan Raspberry Pi 4.
+Hal ini disebabkan oleh spesifikasi perangkat keras yang lebih tinggi pada Intel NUC dibandingkan dengan Raspberry Pi 4 terutama pada \textit{processor}.
+% Terdapat perbedaan model yang memiliki waktu inferensi tercepat pada masing-masing perangkat.
+% Pada Raspberry Pi 4, model BiLSTM memiliki waktu inferensi tercepat pada skenario inferensi menggunakan data dengan durasi 10 detik.
+% Sementara itu, model LSTM-FCN memiliki waktu inferensi tercepat pada skenario inferensi menggunakan data dengan durasi 1 menit dan 10 menit.
+% Pada Intel NUC, model LSTM-256 memiliki waktu inferensi tercepat pada skenario inferensi menggunakan data dengan durasi 10 detik dan 1 menit.
+% Sementara itu, model LSTM-FCN memiliki waktu inferensi tercepat pada skenario inferensi menggunakan data dengan durasi 10 menit.
+Sementara itu, penggunaan memori pada Raspberry Pi 4 dan Intel NUC memiliki selisih yang tidak signifikan.
+Penggunaan memori pada Intel NUC sedikit lebih tinggi dibandingkan dengan Raspberry Pi 4 pada masing-masing skenario pengujian, dengan selisih sekitar 2 MB.
+
+
+
+
+% --- tabel hasil prediksi pada pengujian ---
+% model, pengujian ke-n, hasil prediksi (N, S, V, F, Q)
+% ----------
+% | Model | Pengujian ke | Hasil Prediksi |
+% |       |        | N | S | V | F | Q |
+% |-------|--------|----------------|
+% 1 m								10m					
+% lstm512	n	s	v	f	q			lstm512	n	s	v	f	q
+% 1	59	0	0	0	0			1	978	0	0	0	0
+% 2	62	0	0	0	0			2	969	0	0	0	0
+% 3	62	0	0	0	0			3	969	0	0	0	0
+% 4	60	0	0	0	0			4	969	0	0	0	0
+% 5	58	0	0	0	0			5	969	0	0	0	0
+% lstm256	n	s	v	f	q			lstm256	n	s	v	f	q
+% 1	59	0	0	0	0			1	978	0	0	0	0
+% 2	62	0	0	0	0			2	969	0	0	0	0
+% 3	62	0	0	0	0			3	969	0	0	0	0
+% 4	60	0	0	0	0			4	969	0	0	0	0
+% 5	58	0	0	0	0			5	969	0	0	0	0
+% bilstm	n	s	v	f	q			bilstm	n	s	v	f	q
+% 1	59	0	0	0	0			1	978	0	0	0	0
+% 2	62	0	0	0	0			2	969	0	0	0	0
+% 3	62	0	0	0	0			3	969	0	0	0	0
+% 4	60	0	0	0	0			4	969	0	0	0	0
+% 5	58	0	0	0	0			5	969	0	0	0	0
+% lstmfcn	n	s	v	f	q			lstmfcn	n	s	v	f	q
+% 1	59	0	0	0	0			1	978	0	0	0	0
+% 2	62	0	0	0	0			2	969	0	0	0	0
+% 3	62	0	0	0	0			3	969	0	0	0	0
+% 4	60	0	0	0	0			4	969	0	0	0	0
+% 5	58	0	0	0	0			5	969	0	0	0	0
+
+% -- tabel jumlah detak jantung yang diprediksi pada pengujian --
+% durasi ecg, jumlah detak jantung yang diprediksi
+% ----------
+
+\begin{table}[H]
+\centering
+\caption{Jumlah detak jantung yang diprediksi pada pengujian}
+\label{tab:jumlah-detak-jantung}
+\begin{tabularx}{0.8\textwidth}{
+  |>{\centering\arraybackslash}X
+  |c
+|}
+\hline
+\textbf{Durasi ECG} & \textbf{Jumlah Detak Jantung yang Diprediksi} \\ \hline
+10s                 & 0                                              \\
+\hline
+1m                  & 301                                            \\
+\hline
+10m                 & 4854                                           \\ \hline
+\end{tabularx}
+\end{table}
+
+
+% Tabel \ref{tab:jumlah-detak-jantung} menunjukkan jumlah detak jantung yang diprediksi selama pengujian pada data ECG dengan durasi 10 detik, 1 menit, dan 10 menit.
+Tabel \ref{tab:jumlah-detak-jantung} menunjukkan jumlah total detak jantung yang diprediksi selama lima kali pengujian pada masing-masing skenario pengujian.
+% Jumlah detak jantung yang diprediksi selama pengujian pada data ECG dengan durasi 10 detik, 1 menit, dan 10 menit ditunjukkan pada Tabel \ref{tab:jumlah-detak-jantung}.
+Pada skenario inferensi menggunakan data dengan durasi 10 detik, tidak ada detak jantung yang diprediksi.
+Hal ini disebabkan oleh jumlah detak jantung yang terlalu sedikit pada data dengan durasi 10 detik.
+Jumlah detak jantung yang terlalu sedikit menyebabkan tidak dapat dilakukan ekstraksi fitur karena pada tahap ekstraksi fitur membutuhkan minimal 43 RR-interval atau 44 detak jantung.
+Sementara itu, pada skenario inferensi menggunakan data dengan durasi 1 menit dan 10 menit, jumlah total detak jantung yang diprediksi sebanyak 301 dan 4854 detak jantung.
+
+
+
+% --- waktu inferensi per beat ---
+    % for i in range(len(rr_intervals)):
+    %     if i < 42 or i == len(rr_intervals) - 1:
+    %         continue
+% 42 beats will produce 41 rr intervals
+% so it will need minimum of
+Dari hasil pengujian pada skenario inferensi menggunakan data dengan durasi 1 menit dan 10 menit, dapat dihitung waktu inferensi per detak jantung pada masing-masing model seperti yang ditunjukkan pada Tabel \ref{tab:waktu-inferensi-per-beat-raspi4} dan Tabel \ref{tab:waktu-inferensi-per-beat-intelnuc}.
+Apabila dihitung waktu inferensi per detak jantung, model LSTM-FCN memiliki waktu inferensi per detak jantung tercepat, baik pada Raspberry Pi 4 maupun Intel NUC.
+Pada Raspberry Pi 4, model LSTM-FCN memiliki waktu inferensi per detak jantung sebesar 12,0372 ms, sedangkan pada Intel NUC, model LSTM-FCN memiliki waktu inferensi per detak jantung sebesar 2,8435 ms.
+% posible for real-time application
+Waktu inferensi per detak jantung pada Raspberry Pi 4 dan Intel NUC yang relatif cepat memungkinkan model dapat digunakan untuk aplikasi \textit{real-time}.
+
+% normal resting heart rate is 50-90 bpm and can be as low as 30 bpm in athletes
+% so the minimum rr interval is 30/60 = 0.5 s
+% that means, for real-time application, the maximum time to process 1 beat is 0.5 s
+
+%rpi
+%lstm512 lstm256 bilstm lstmfcn
+% 15.8633633491373						13.6235298022468						14.3540212386035						12.0371508949366
+
+%nuc
+%lstm512 lstm256 bilstm lstmfcn
+% 3.91885739357172						2.90504177306471						3.31934236690784						2.84347337445122
+
+\begin{table}[H]
+\centering
+\caption{Waktu inferensi per detak jantung pada Raspberry Pi 4}
+\label{tab:waktu-inferensi-per-beat-raspi4}
+\begin{tabularx}{0.8\textwidth}{
+  |>{\centering\arraybackslash}X
+  |c
+|}
+\hline
+\textbf{Model} & \textbf{Waktu Inferensi per Detak Jantung (ms)} \\ \hline
+LSTM-512       & 15,8634                   \\
+\hline
+LSTM-256       & 13,6235                   \\
+\hline
+BiLSTM         & 14,3540                   \\
+\hline
+LSTM-FCN       & \textbf{12,0372}                   \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Waktu inferensi per detak jantung pada Intel NUC}
+\label{tab:waktu-inferensi-per-beat-intelnuc}
+\begin{tabularx}{0.8\textwidth}{
+  |>{\centering\arraybackslash}X
+  |c
+|}
+\hline
+\textbf{Model} & \textbf{Waktu Inferensi per Detak Jantung (ms)} \\ \hline
+LSTM-512       & 3,9189                   \\
+\hline
+LSTM-256       & 2,9050                   \\
+\hline
+BiLSTM         & 3,3193                   \\
+\hline
+LSTM-FCN       & \textbf{2,8435}                   \\ \hline
+\end{tabularx}
+\end{table}
+
+% --- komparasi dengan penelitian terkait ---
+
+% \begin{table}[H]
+% \centering
+% \caption{Komparasi dengan penelitian terdahulu}
+% \label{tab:komparasi}
+% \begin{tabular}{ccccc}
+% \hline
+% \textbf{Penelitian} & \textbf{Perangkat} & \textbf{Akurasi} & \textbf{Waktu Inferensi} & \textbf{Penggunaan Memori} \\ \hline
+%
+% \cite{saadatnejadLSTMBasedECGClassification2020} & Moto 360 (ARM Cortex-A7) & 0.9741 & 31.2ms & - \\
+%
+% % Penelitian ini & RR
+% \end{tabular}
+% \end{table}
+
+% use tabularx instead
+
+\begin{table}[H]
+\centering
+\caption{Komparasi dengan penelitian terdahulu}
+\label{tab:komparasi}
+% \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}XXccc}
+\begin{tabularx}{\textwidth}{
+  |>{\raggedright\arraybackslash}X
+  |>{\centring\arraybackslash}X
+  |>{\raggedright\arraybackslash}X
+  |c
+  |c
+  % |>{\raggedright\arraybackslash}X
+  % |>{\raggedright\arraybackslash}X
+|}
+\hline
+% \textbf{Penelitian} & \textbf{Perangkat} & \textbf{Akurasi} & \makecell{\textbf{Waktu} \\ \textbf{Inferensi}} & \makecell{\textbf{Penggunaan} \\ \textbf{Memori}} \\ \hline
+\textbf{Penelitian} & \textbf{Model} & \textbf{Perangkat} & \textbf{Akurasi} & \makecell{\textbf{Waktu} \\ \textbf{Inferensi (ms)}} \\ \hline
+
+\cite{saadatnejadLSTMBasedECGClassification2020} & LSTM & Moto 360 (ARM Cortex-A7) & 0,9741 & 31,2\\
+\hline
+
+\cite{9878113} & Conv1D + Conv2D & Raspberry Pi & 0,991 & 9\\
+\hline
+
+% 21.1326 s / 3267
+\cite{sururiComparisonSeveralWavelet2023} & CNN & Intel Core i5 & 0,9908 & 6,47\\
+\hline
+
+\cite{FALASCHETTI20223479} & LSTM & STM32L4 (ARM Cortex-M4) & 0,9019 & 665,86\\
+\hline
+
+\cite{liEnablingOndeviceClassification2021} & 1-D CNN & Raspberry Pi Zero & 0,9835 & 7,08\\
+\hline
+
+\cite{heLiteNetLightweightNeural2018} & LiteNet & Intel Core i3-2370M & 0,9787 & \tilde 25\\
+\hline
+
+\cite{abayaratneRealTimeCardiacArrhythmia2019} & RNN-LSTM & - & 0,947 & 6,88\\
+\hline
+
+\cite{mhamdiArtificialIntelligenceCardiac2022} & MobileNetV2 & Raspberry Pi 4 B & 0,94 & 160\\
+\hline
+
+\textbf{Penelitian ini} & LSTM-256 & Raspberry Pi 4 B (ARM Cortex-A72) & 0,9679 & 15,86\\
+\hline
+\textbf{Penelitian ini} & LSTM-256 & Intel NUC (Intel Core i3-1115G4) & 0,9679 & 3,92\\ 
+
+\hline
+\end{tabularx}
+\end{table}
+
+Tabel \ref{tab:komparasi} menunjukkan komparasi hasil penelitian ini dengan beberapa penelitian terdahulu.
+Komparasi dilakukan berdasarkan akurasi, waktu inferensi, dan perangkat yang digunakan pada penelitian terdahulu.
+Model pada penelitian ini yang digunakan untuk komparasi adalah model LSTM-256.
+Model LSTM-256 dipilih karena memiliki akurasi tertinggi nomor dua setelah model LSTM-512 dengan selisih akurasi yang tidak signifikan serta memiliki waktu inferensi tercepat nomor dua setelah model LSTM-FCN baik pada Raspberry Pi 4 maupun Intel NUC.
+Komparasi tersebut menunjukkan bahwa model LSTM-256 yang digunakan pada penelitian ini memiliki akurasi serta waktu inferensi yang kompetitif dibandingkan dengan penelitian terdahulu.
+Model LSTM-256 menduduki peringkat enam dalam hal akurasi.
+Sementara itu, model LSTM-256 pada Intel NUC menduduki peringkat pertama dalam hal waktu inferensi.
+

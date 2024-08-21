@@ -14,11 +14,11 @@
 
 % TO DO: alur penelitian
 % studi literatur, pembuatan model, implementasi dan pengujian, penarikan kesimpulan
-Penelitian ini dilakukan dengan beberapa tahapan, yaitu studi literatur, pembuatan model, implementasi, pengujian, dan penarikan kesimpulan. Gambar \ref{fig:alur-penelitian} menunjukkan alur penelitian yang digunakan pada penelitian ini.
+Penelitian ini dilakukan dengan beberapa tahapan, yaitu studi literatur, perancangan model, pelatihan model, implementasi, pengujian, dan penarikan kesimpulan. Gambar \ref{fig:alur-penelitian} menunjukkan alur penelitian yang digunakan pada penelitian ini.
 
 \begin{figure}[tph]
 	\centering
-	\includegraphics[width=.45\linewidth]{./img/lstm-alur penelitian.drawio.pdf}
+	\includegraphics[width=.5\linewidth]{./img/lstm-alur penelitian.drawio.pdf}
 	\caption{Alur penelitian}
 	\label{fig:alur-penelitian}
 \end{figure}
@@ -118,18 +118,23 @@ Oleh karena itu, pada penelitian ini dilakukan modifikasi pada LSTM-FCN dengan m
 \label{subsec: metodologi-pelatihan-model}
 % - Parameter pelatihan
 % - Metode pelatihan
-Pada tahap ini, dilakukan pelatihan model LSTM, Bi-LSTM, dan LSTM-FCN menggunakan data ECG yang telah diproses.
+% Pada tahap ini, dilakukan pelatihan model LSTM, Bi-LSTM, dan LSTM-FCN menggunakan data ECG yang telah diproses.
+Pada tahap ini, dilakukan pelatihan model LSTM, Bi-LSTM, dan LSTM-FCN yang telah dirancang sebelumnya.
+Model akan dilatih menggunakan data ECG yang telah diproses sebelumnya.
 Pelatihan model dilakukan dengan menggunakan bantuan \textit{framework} TensorFlow.
 Sebelum dilakukan pelatihan, data ECG yang digunakan akan dipisahkan menjadi data latih dan data uji dengan perbandingan 70:30.
 Pemisahan data ini dilakukan untuk memastikan bahwa model yang dibuat mampu menggeneralisasi data dengan baik.
+Pemisahan ini memungkinkan evaluasi performa model dengan menggunakan data yang belum pernah dilihat sebelumnya.
 
 % Proses pelatihan mencakup beberapa langkah utama, yaitu normalisasi data, pembentukan batch, dan optimasi hiperparameter.
 % Model dilatih menggunakan algoritma optimasi seperti Adam dengan berbagai konfigurasi laju pembelajaran.
+Pelatihan model dilakukan dengan menggunakan data latih.
 Selama proses pelatihan, terdapat beberapa hiperparameter yang perlu diatur, seperti jumlah \textit{epoch}, ukuran \textit{batch}, dan \textit{learning rate}.
 %tidak ada optimasi hiperparameter, hiperparameter sudah ditentukan di awal
-Hiperparameter yang digunakan antara lain jumlah \textit{epoch} sebanyak 50, ukuran \textit{batch} 256, dan \textit{learning rate} sebesar 0.001.
+Hiperparameter yang digunakan antara lain jumlah \textit{epoch} sebanyak 50, ukuran \textit{batch} 256, dan \textit{learning rate} sebesar 0,001.
+Setelah model dilatih, model juga akan dievaluasi dengan menggunakan data uji.
 Evaluasi performa model dilakukan menggunakan metrik akurasi, presisi, recall, dan F1-score untuk setiap model.
-% Hasil evaluasi ini kemudian dianalisis untuk menentukan model yang paling baik untuk klasifikasi detak jantung.
+Hasil evaluasi ini akan menunjukkan seberapa baik dan akurat model yang telah dilatih dalam melakukan klasifikasi detak jantung.
 
 % \section{Evaluasi Model}
 % \label{subsec: metodologi-evaluasi-model}
@@ -144,7 +149,16 @@ Untuk melakukan inferensi model, diperlukan implementasi model pada perangkat ya
 Model diimplementasikan dalam bentuk aplikasi berbasis web.
 % Aplikasi ini digunakan untuk melakukan inferensi pada data detak jantung yang diperoleh dari sensor ECG.
 Aplikasi akan menerima data ECG dan akan mengembalikan keluaran berupa hasil klasifikasi detak jantung.
-Nantinya, aplikasi ini akan diaplikasikan pada perangkat Raspberry Pi 4 dan Intel NUC.
+Sebelum diimplementasikan, model dioptimasi terlebih dahulu agar dapat beroperasi secara efisien.
+
+Aplikasi akan diaplikasikan pada perangkat Raspberry Pi 4 dan Intel NUC.
+Perangkat Raspberry Pi 4 dipilih karena Raspberry Pi 4 merupakan salah satu perangkat tepi yang populer digunakan untuk sistem pemantauan kesehatan.
+Selain itu, karena Raspberry Pi 4 yang mendukung sistem operasi Linux, maka implementasi model pada perangkat ini akan lebih mudah dilakukan.
+Sementara itu, Intel NUC dipilih sebagai perangkat pembanding karena Intel NUC merupakan komputer konsumer yang memiliki spesifikasi lebih tinggi dibandingkan dengan Raspberry Pi 4.
+Kedua perangkat ini memiliki spesifikasi yang berbeda terutama pada arsitektur prosesor.
+Raspberry Pi 4 Model B menggunakan arsitektur ARM sementara Intel NUC menggunakan arsitektur x86.
+Pengujian pada dua perangkat ini dapat memberikan gambaran kinerja aplikasi pada perangkat dengan arsitektur dan spesifikasi yang berbeda.
+% terutama pada perangkat dengan daya komputasi rendah seperti Raspberry Pi.
 
 % ini pindah ke bab 5 (implementasi dan pengujian)
 % Sebelum diimplementasikan, model dioptimasi terlebih dahulu agar dapat beroperasi secara efisien terutama pada perangkat dengan daya komputasi rendah seperti Raspberry Pi.
@@ -162,11 +176,17 @@ Nantinya, aplikasi ini akan diaplikasikan pada perangkat Raspberry Pi 4 dan Inte
 % pindah ke landasan teori
 
 Pada tahap pengujian, dilakukan pengujian inferensi model pada perangkat Raspberry Pi 4 dan Intel NUC.
-Tujuan dari pengujian ini adalah untuk mengevaluasi performa inferensi dari model yang telah dibuat pada beberapa perangkat.
-Pengujian dilakukan menggunakan data uji berupa data ECG yang diperoleh dari sensor ECG Polar H10.
-Metrik pengujian yang digunakan adalah waktu prediksi dan penggunaan memori saat melakukan inferensi pada perangkat.
-Data detak jantung yang digunakan dalam pengujian memiliki durasi sepanjang 10 detik, 1 menit, dan 10 menit.
-Pengujian dilakukan menggunakan tiga model yang telah dilatih sebelumnya, yaitu LSTM, Bi-LSTM, dan LSTM-FCN.
+% Tujuan dari pengujian ini adalah untuk mengevaluasi performa inferensi dari model yang telah dibuat pada kedua perangkat tepi tersebut.
+Pengujian dilakukan untuk mengevaluasi performa inferensi dari model yang telah dibuat pada kedua perangkat tersebut.
+% Pengujian dilakukan menggunakan data uji berupa data ECG yang diperoleh dari sensor ECG Polar H10.
+% By testing the models on different durations, you can assess their ability to accurately classify heartbeats in real-time scenarios where different durations of ECG data may be available.
+% This information is valuable in understanding the suitability and generalizability of the models for different applications and scenarios.
+Pengujian dilakukan menggunakan data primer berupa data ECG yang diperoleh dari sensor ECG Polar H10.
+Metrik pengujian yang digunakan adalah waktu inferensi dan penggunaan memori saat melakukan inferensi pada perangkat.
+Data detak jantung yang digunakan dalam pengujian memiliki durasi sepanjang 10 detik, 1 menit, dan 10 menit untuk memberikan hasil yang lebih komprehensif dan dapat memberikan gambaran yang lebih baik terkait performa model pada berbagai durasi data ECG.
+%jelaskan mengapa menggunakan 10 detik, 1 menit, dan 10 menit
+% agar lebih general dan komprehensif
+% Pengujian dilakukan menggunakan tiga model yang telah dilatih sebelumnya, yaitu LSTM, Bi-LSTM, dan LSTM-FCN.
 Setiap pengujian diulang sebanyak 5 kali untuk setiap jenis model, dan hasil yang diperoleh kemudian dijadikan nilai rata-rata sebagai hasil akhir.
 
 \section{Penarikan Kesimpulan}

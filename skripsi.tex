@@ -6,6 +6,7 @@
 % ------------------------------------------------------------
 % Add your own needed package here
 \usepackage[skip=2.12mm, indent=6mm]{parskip}
+\usepackage{tabularx}
 % ------------------------------------------------------------
 % Needed to add prefix for images and tables
 \usepackage[titles]{tocloft}
@@ -169,7 +170,13 @@
 % Fill your data here
 % -----------------------------------------------------------------
 % title
-\titleskripsi{Prediksi Detak Jantung Berbasis LSTM pada Raspberry Pi untuk Pemantauan Kesehatan Portabel}
+% \titleskripsi{Prediksi Detak Jantung Berbasis LSTM pada Raspberry Pi untuk Pemantauan Kesehatan Portabel}
+% \titleskripsi{Inferensi Model Klasifikasi Detak Jantung Berbasis LSTM pada perangkat tepi}
+% \titleskripsi{Analisis Performa Model Klasifikasi Detak Jantung Berbasis LSTM pada Perangkat Tepi}
+\titleskripsi{Evaluasi Performa Model Klasifikasi Detak Jantung Berbasis LSTM pada Perangkat Tepi}
+\titleskripsienglish{Evaluation of LSTM-based Heartbeat Classification Model Performance on Edge Devices}
+% \titleskripsi{Evaluasi Performa Model LSTM, Bi-LSTM, dan LSTM-FCN untuk Klasifikasi Detak Jantung pada Perangkat Tepi}
+% \titleskripsi{Evaluasi Performa Model Berbasis LSTM untuk Klasifikasi Detak Jantung pada Perangkat Tepi}
 % personal data
 \fullname{Ahmad Foresta Azhar Zen}
 \idnum{205150201111051}
@@ -193,15 +200,17 @@
 \hyphenpenalty=10000
 \begin{document}
 
+
 % -----------------------------------------------------------------
 % Cover
 % -----------------------------------------------------------------
 \cover
+% --- cek plagiasi
 
 % -----------------------------------------------------------------
 % Approval Page
 % -----------------------------------------------------------------
-%\preapprovalpage
+% \preapprovalpage
 \approvalpage
 
 %-----------------------------------------------------------------
@@ -225,7 +234,7 @@
   \vspace{1.5cm}
 
   \noindent
-  \hspace*{9cm}Malang, 2 Juli 2019
+  \hspace*{9cm}Malang, 24 Juli 2024
   \vspace{2.5cm}   \\
   \hspace*{9cm}\underline{Ahmad Foresta Azhar Zen} \\
   \hspace*{9cm}NIM : 205150201111051
@@ -238,8 +247,7 @@
 
   Puji syukur kehadirat Allah SWT yang telah melimpahkan rahmat,
   taufik dan hidayah-Nya sehingga skripsi yang berjudul 
-  "Prediksi Detak Jantung Berbasis LSTM pada Raspberry Pi untuk
-  Pemantauan Kesehatan Portabel" ini dapat terselesaikan. Dengan
+  "Evaluasi Performa Model Klasifikasi Detak Jantung Berbasis LSTM pada Perangkat Tepi" ini dapat terselesaikan. Dengan
   selesainya penulisan skripsi ini, penulis ingin menyampaikan terima kasih
   kepada:
 
@@ -247,7 +255,7 @@
     \begin{enumerate}
   \item{Allah SWT yang telah memberikan nikmat kesehatan, kekuatan dan
       kemudahan sehingga penulis dapat menyelesaikan skripsi ini.}
-  \item{Ustaz, orang tua dan seluruh keluarga besar penulis yang
+  \item{Orang tua dan seluruh keluarga besar penulis yang
       senantiasa mendoakan dan mendukung demi terselesaikannya skripsi
       ini.}
   \item{Bapak Eko Sakti Pramukantoro, S.Kom., M.Kom., Ph.D, selaku Dosen Pembimbing I
@@ -262,7 +270,7 @@
       Komputer, Universitas Brawijaya.}
   \item{Seluruh pengembang kakas bantu perangkat lunak bebas yang
       digunakan dalam skripsi ini.}
-  \item{Seluruh civitas akademika Teknik Informatika Universitas
+  \item{Seluruh civitas akademia Teknik Informatika Universitas
       Brawijaya yang telah banyak memberi bantuan dan dukungan selama
       penyelesaian skripsi ini.}
   \end{enumerate}
@@ -276,7 +284,7 @@
   \vspace{0.8cm}
 
   \noindent
-  \hspace*{8cm}Malang, 2 Juli 2019  
+  \hspace*{8cm}Malang, 5 Juli 2024
   \vspace{1.5cm} \\
   \hspace*{8cm}Penulis \\
   \hspace*{8cm}ahmadforesta@student.ub.ac.id
@@ -288,33 +296,33 @@
 {\abstractind
 
   \noindent
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis magna nec
-  eros hendrerit rhoncus. Mauris aliquam erat lobortis, bibendum libero nec,
-  accumsan arcu. Cras eleifend, orci scelerisque scelerisque congue, ex nibh
-  volutpat metus, ultrices feugiat dolor ipsum quis odio. Suspendisse vel elit
-  non enim pulvinar vehicula eu id odio. In viverra aliquet ex, at volutpat odio
-  ultricies sed. Quisque eu tempus metus. Vestibulum ante ipsum primis in
-  faucibus orci luctus et ultrices posuere cubilia Curae; Nam a rutrum nunc, ut
-  egestas neque. Etiam consectetur odio et mi laoreet egestas.  Interdum et
-  malesuada fames ac ante ipsum primis in faucibus. Morbi pharetra tincidunt
-  viverra. Aliquam sit amet ornare lorem, sed euismod felis. Praesent eget
-  tellus ac nunc efficitur efficitur et at mi. Nunc ultricies maximus nibh, a
-  sollicitudin tortor laoreet eu. Fusce velit ligula, lacinia ac tempor
-  ultrices, lobortis vel nunc. Pellentesque lectus nisl, cursus vitae ultrices
-  sit amet, bibendum sit amet magna. Pellentesque ullamcorper enim et nisl
-  mollis, id ornare nibh luctus. Nunc ut sapien augue.  Fusce rutrum eros semper
-  tincidunt malesuada. Sed ut velit eu elit consequat suscipit. Integer at eros
-  felis. Nulla mollis mi dolor, id lacinia sem commodo ut. Vestibulum ornare ex
-  sed consectetur suscipit. Sed vehicula feugiat justo, vitae faucibus
-  elit. Praesent non aliquam nulla, eget posuere orci. Nullam ultrices velit eu
-  lobortis rhoncus. Suspendisse imperdiet posuere magna in sagittis. Nullam eget
-  luctus lectus. Vivamus condimentum quis velit cursus vulputate. Cras nec urna
-  eget arcu hendrerit condimentum non at sem. In leo
-  neque, ultrices accumsan blandit rutrum, convallis sit amet ante.\\
+  %pengantar
+  % salah satu implementasi deeplearning pada bidang kesehatan untuk pemantauan detak jantung. Untuk melakukan klasifikasi detak jantung lstm terbukti memiliki hasil yang baik.
+  %lstm cocok digunakan untuk data yang berurutan sehingga cocok digunakan untuk data detak jantung yang bersifat sekuensial.
+  % masalah
+  % salah satu tantangan dalam implementasi model deep learning adalah efisiensi inferensi pada perangkat tepi.
+  %solusi
+  % pada penelitian ini dilakukan evaluasi performa model klasifikasi detak jantung berbasis LSTM pada perangkat tepi.
+  % hasil penelitian menunjukkan model berbasis lstm memiliki akurasi baik dengan akurasi tertinggi sebesar 96.79% yang diperoleh oleh model lstm-512.
+  % hasil penelitian menunjukkan model berbasi lstm memiliki peforma inferensi yang baik dengan waktu inferensi di bawah 20ms per detak jantung dan penggunaan memori di bawah 200mb.
+  % performa inferensi terbaik lstm-fcn dengan waktu inferensi 12.0372 ms per detak jantung pada raspberry pi 4 model b dan 2.8435 ms per detak jantung pada intel nuc.
+  Kecerdasan buatan (\textit{artificial intelligence}) berbasis \textit{deep learning} telah banyak digunakan dalam berbagai bidang, termasuk dalam bidang kesehatan.
+  Salah satu implementasi \textit{deep learning} dalam bidang kesehatan adalah untuk pemantauan detak jantung.
+  \textit{Long Short-Term Memory} (LSTM) terbukti memiliki hasil yang baik dalam melakukan klasifikasi detak jantung.
+  % Salah satu metode \textit{deep learning} yang terbukti memiliki hasil yang baik dalam melakukan klasifikasi detak jantung adalah \textit{Long Short-Term Memory} (LSTM).
+  LSTM terkenal akan kemampuannya dalam memproses data yang berurutan, sehingga cocok digunakan untuk data detak jantung yang bersifat sekuensial.
+  Salah satu tantangan dalam implementasi model \textit{deep learning} adalah efisiensi inferensi pada perangkat tepi.
+  Efisiensi inferensi pada perangkat tepi merupakan kunci untuk penggunaan model secara luas.
+  % Pada penelitian ini dilakukan evaluasi performa model klasifikasi detak jantung berbasis LSTM pada perangkat tepi untuk mengetahui efisiensi inferensi model.
+  Oleh karena itu, perlu dilakukan evaluasi performa model klasifikasi detak jantung berbasis LSTM pada perangkat tepi untuk mengetahui efisiensi inferensi model.
+  Pada penelitian ini dilakukan pelatihan model LSTM, Bi-LSTM, dan LSTM-FCN untuk klasifikasi detak jantung dan dilakukan evaluasi performa model pada perangkat Raspberry Pi 4 Model B dan Intel NUC.
+  Hasil penelitian menunjukkan model berbasis LSTM memiliki akurasi baik dengan akurasi tertinggi sebesar 96,79\% yang diperoleh oleh model LSTM-512.
+  Hasil penelitian juga menunjukkan model berbasis LSTM memiliki performa inferensi yang baik dengan waktu inferensi di bawah 20ms per detak jantung dan penggunaan memori di bawah 200MB.
+  Performa inferensi terbaik diperoleh oleh model LSTM-FCN dengan waktu inferensi 12,0372 ms per detak jantung pada Raspberry Pi 4 Model B dan 2,8435 ms per detak jantung pada Intel NUC serta penggunaan memori berkisar antara 131MB hingga 183MB.\\
+
 
   \noindent
-  \textbf{Keywords}: \emph{Lorem ipsum},
-  \emph{dolor sit amet}, \emph{consectetur}
+  \textbf{Kata kunci}: Inferensi, LSTM, Detak Jantung, Perangkat Tepi, ECG
 
 }
 
@@ -324,33 +332,22 @@
 {\abstracteng
 
   \noindent
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis magna nec
-  eros hendrerit rhoncus. Mauris aliquam erat lobortis, bibendum libero nec,
-  accumsan arcu. Cras eleifend, orci scelerisque scelerisque congue, ex nibh
-  volutpat metus, ultrices feugiat dolor ipsum quis odio. Suspendisse vel elit
-  non enim pulvinar vehicula eu id odio. In viverra aliquet ex, at volutpat odio
-  ultricies sed. Quisque eu tempus metus. Vestibulum ante ipsum primis in
-  faucibus orci luctus et ultrices posuere cubilia Curae; Nam a rutrum nunc, ut
-  egestas neque. Etiam consectetur odio et mi laoreet egestas.  Interdum et
-  malesuada fames ac ante ipsum primis in faucibus. Morbi pharetra tincidunt
-  viverra. Aliquam sit amet ornare lorem, sed euismod felis. Praesent eget
-  tellus ac nunc efficitur efficitur et at mi. Nunc ultricies maximus nibh, a
-  sollicitudin tortor laoreet eu. Fusce velit ligula, lacinia ac tempor
-  ultrices, lobortis vel nunc. Pellentesque lectus nisl, cursus vitae ultrices
-  sit amet, bibendum sit amet magna. Pellentesque ullamcorper enim et nisl
-  mollis, id ornare nibh luctus. Nunc ut sapien augue.  Fusce rutrum eros semper
-  tincidunt malesuada. Sed ut velit eu elit consequat suscipit. Integer at eros
-  felis. Nulla mollis mi dolor, id lacinia sem commodo ut. Vestibulum ornare ex
-  sed consectetur suscipit. Sed vehicula feugiat justo, vitae faucibus
-  elit. Praesent non aliquam nulla, eget posuere orci. Nullam ultrices velit eu
-  lobortis rhoncus. Suspendisse imperdiet posuere magna in sagittis. Nullam eget
-  luctus lectus. Vivamus condimentum quis velit cursus vulputate. Cras nec urna
-  eget arcu hendrerit condimentum non at sem. In leo
-  neque, ultrices accumsan blandit rutrum, convallis sit amet ante.\\
+Artificial intelligence based on deep learning has been widely used in various fields, including healthcare.
+One implementation of deep learning in the healthcare field is for heartbeat monitoring.
+Long Short-Term Memory (LSTM) has proven to yield good results in heartbeat classification.
+% One of the deep learning methods that has proven to yield good results in heartbeat classification is Long Short-Term Memory (LSTM).
+LSTM is renowned for its ability to process sequential data, making it suitable for sequential heartbeat data.
+One of the challenges in implementing deep learning models is inference efficiency on edge devices.
+Inference efficiency on edge devices is key to widespread model adoption.
+% This research evaluates the performance of LSTM-based heartbeat classification models on edge devices to determine the model's inference efficiency.
+Therefore, it is necessary to evaluate the performance of LSTM-based heartbeat classification models on edge devices to determine the model's inference efficiency.
+This research trains LSTM, Bi-LSTM, and LSTM-FCN models for heartbeat classification and evaluates the model's performance on the Raspberry Pi 4 Model B and Intel NUC.
+The results show that LSTM-based models have good accuracy, with the highest accuracy of 96.79\% achieved by the LSTM-512 model.
+The results also indicate that LSTM-based models have good inference performance with inference times below 20ms per heartbeat and memory usage below 200MB.
+The best inference performance was obtained by the LSTM-FCN model with an inference time of 12.0372 ms per heartbeat on the Raspberry Pi 4 Model B and 2.8435 ms per heartbeat on the Intel NUC, with memory usage ranging from 131MB to 183MB.\\
 
   \noindent
-  \textbf{Keywords}: \emph{Lorem ipsum},
-  \emph{dolor sit amet}, \emph{consectetur}
+  \textbf{Keywords}: \emph{Inference, LSTM, Heartbeat, Edge Device, ECG}
 
 }
 
@@ -366,20 +363,24 @@
 % FIXME \listofappendices
 \addcontentsline{toc}{chapter}{DAFTAR LAMPIRAN}
 
+% --- cek plagiasi end
+
 % -----------------------------------------------------------------
 % Chapter
 % -----------------------------------------------------------------
 % change numbering to arabic from bab1
 \selectlanguage{bahasa}\clearpage\pagenumbering{arabic}\setcounter{page}{1}
 
-\include{bab1}
+\include{bab1-v2}
+% \include{bab1}
 \include{bab2}
 \include{bab3}
 \include{bab4}
-% \include{bab5}
-% \include{bab6}
-% \include{bab7}
+\include{bab5}
+\include{bab6}
+\include{bab7}
 
+% --- cek plagiasi
 % -----------------------------------------------------------------
 % Bibliography
 % -----------------------------------------------------------------
@@ -387,6 +388,7 @@
 \addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
 \emergencystretch=8em % prevent overfull hbox
 \printbibliography[title={DAFTAR PUSTAKA}]
+% --- cek plagiasi end
 
 
 \end{document}

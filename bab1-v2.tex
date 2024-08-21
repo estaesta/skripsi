@@ -1,0 +1,155 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BAB 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mychapter{1}{BAB 1 PENDAHULUAN}
+
+\section{Latar Belakang Masalah}
+Kecerdasan buatan (\textit{artificial intelligence}) semakin banyak digunakan dalam berbagai bidang, seperti kesehatan, pertanian, pendidikan, dan lain-lain.
+Salah satu cabang dari kecerdasan buatan yang banyak digunakan adalah \textit{deep learning}.
+\textit{Deep learning} merupakan cabang dari pembelajaran mesin yang memiliki beberapa lapisan jaringan saraf tiruan \parencite{shindeReviewMachineLearning2018}.
+% salah satu tantangan...
+Salah satu tantangan dalam implementasi kecerdasan buatan berbasis \textit{deep learning} adalah efisiensi model dalam melakukan inferensi pada perangkat tepi (\textit{edge device}).
+% Inferensi adalah proses penggunaan model yang telah dilatih sebelumnya untuk melakukan prediksi pada data yang baru \parencite{AIInferenceVs}.
+Efisiensi inferensi pada perangkat tepi dengan sumber daya terbatas merupakan kunci untuk penggunaan model secara luas \parencite{ulkerReviewingInferencePerformance2020}.
+
+Perangkat tepi atau \textit{edge device} merupakan perangkat yang berada pada ujung jaringan yang berfungsi untuk memproses data secara lokal \parencite{khouasTrainingMachineLearning2024}.
+Perangkat ini memiliki sumber daya terbatas, terutama dalam hal daya komputasi dan memori.
+Oleh karena itu, model yang digunakan untuk inferensi pada perangkat tepi harus efisien dalam penggunaan sumber daya.
+Pengujian performa inferensi model pada perangkat tepi dapat memberikan informasi mengenai efisiensi inferensi model tersebut.
+
+% salah satu implementasi dari deep learning adalah klasifikasi detak jantung.
+% Salah satu implementasi dari \textit{deep learning} adalah untuk melakukan pemantauan detak jantung.
+Salah satu implementasi dari \textit{deep learning} dalam bidang kesehatan adalah untuk melakukan pemantauan detak jantung.
+Detak jantung merupakan hal vital pada kesehatan manusia.
+Detak jantung yang tidak normal dapat menjadi tanda adanya penyakit kardiovaskular.
+Penyakit kardiovaskular menjadi penyebab kematian terbesar di dunia \parencite{worldhealthorganizationCardiovascularDiseasesCVDs2021}.
+Dengan melakukan pemantauan detak jantung dengan menggunakan model klasifikasi detak jantung berbasis \textit{deep learning}, detak jantung yang tidak normal dapat dideteksi lebih awal sehingga dapat dilakukan tindakan pencegahan lebih dini.
+% Dengan melakukan pemantauan detak jantung menggunakan model klasifikasi detak jantung berbasis \textit{deep learning}, detak jantung yang tidak normal dapat dideteksi lebih awal.
+% Deteksi gejala penyakit kardiovaskular lebih dini dapat membantu dalam pencegahan kematian akibat penyakit tersebut.
+
+
+% Beberapa penelitian telah dilakukan untuk melakukan implementasi dan evaluasi performa inferensi model klasifikasi detak jantung pada perangkat tepi.
+
+
+Salah satu metode yang dapat digunakan dalam klasifikasi detak jantung adalah \textit{Long Short-Term Memory} (LSTM).
+\textcite{shchetininArrhythmiaDetectionUsing2022} telah membuktikan bahwa model \textit{deep learning} berbasis \emph{Long Short-Term Memory} (LSTM) dapat digunakan untuk melakukan klasifikasi detak jantung menggunakan data ECG.
+Model tersebut mampu mengklasifikasikan detak jantung ke dalam lima kelas dengan akurasi yang tinggi.
+LSTM merupakan arsitektur jaringan saraf tiruan yang dikembangkan dari \emph{Recurrent Neural Network} (RNN).
+LSTM memiliki kemampuan untuk mengatasi masalah \textit{vanishing gradient} yang sering terjadi pada RNN tradisional \parencite{hochreiterLongShorttermMemory1997}.
+Masalah \textit{vanishing gradient} dapat menyebabkan model kesulitan untuk belajar dan mempertahankan informasi dari masa lalu.
+LSTM terkenal akan kemampuannya dalam mengelola data sekuensial atau berurutan.
+% LSTM merupakan salah satu arsitektur jaringan saraf tiruan yang terkenal akan kemampuannya dalam mengelola data sekuensial atau berurutan.
+Hal ini membuat LSTM cocok digunakan untuk melakukan klasifikasi detak jantung yang merupakan data sekuensial.
+
+
+
+% Berdasarkan latar belakang di atas, pada penelitian ini akan dikembangkan dan diimplementasikan model prediksi detak jantung berbasis LSTM pada perangkat tepi.
+% inference real data / primer data ( not dataset )
+% Berdasarkan latar belakang di atas, penelitian ini akan melatih model klasifikasi detak jantung berbasis LSTM yang kemudian akan diimplementasikan pada perangkat tepi untuk melakukan inferensi menggunakan data primer detak jantung yang diperoleh dari sensor ECG.
+Berdasarkan latar belakang di atas, penelitian ini akan merancang dan melatih model klasifikasi detak jantung berbasis LSTM.
+Model ini kemudian akan diimplementasikan pada perangkat tepi untuk melakukan inferensi menggunakan data primer detak jantung yang diperoleh dari sensor ECG.
+Penelitian ini juga akan melakukan evaluasi performa model prediksi detak jantung berbasis LSTM pada perangkat tepi baik dari segi akurasi, presisi, \emph{recall}, dan \emph{F1-score} maupun dari segi efisiensi inferensi model pada perangkat yang berbeda-beda.
+
+
+
+
+
+\section{Rumusan Masalah}
+
+Berdasarkan latar belakang di atas maka dilakukan penyusunan rumusan masalah sebagai berikut:
+
+\begin{enumerate}
+  \item Bagaimana nilai akurasi, presisi, \emph{recall}, dan \emph{F1-score} dari model klasifikasi detak jantung berbasis LSTM.
+  % \item Bagaimana nilai akurasi, presisi, \emph{recall}, dan \emph{F1-score} dari model LSTM, Bi-LSTM, dan LSTM-FCN untuk klasifikasi detak jantung.
+  % \item Bagaimana waktu inferensi serta penggunaan memori dari model prediksi detak jantung berbasis LSTM pada beberapa perangkat.
+  \item Bagaimana hasil evaluasi inferensi model klasifikasi detak jantung berbasis LSTM pada perangkat tepi.
+\end{enumerate}
+
+
+\section{Tujuan Penelitian}
+Tujuan dilakukannya penelitian ini adalah sebagai berikut:
+
+\begin{enumerate}
+  % \item Mengembangkan dan mengimplementasikan model prediksi detak jantung berbasis LSTM pada Raspberry Pi.
+  % \item Melakukan evaluasi model prediksi detak jantung berbasis LSTM pada Raspberry Pi.
+  \item Mengetahui nilai akurasi, presisi, \emph{recall}, dan \emph{F1-score} dari model klasifikasi detak jantung berbasis LSTM.
+  % \item Mengetahui waktu inferensi serta penggunaan memori dari model klasifikasi detak jantung berbasis LSTM pada perangkat tepi.
+  \item Mengetahui hasil evaluasi inferensi model klasifikasi detak jantung berbasis LSTM pada perangkat tepi.
+\end{enumerate}
+
+
+\section{Manfaat Penelitian}
+
+% Manfaat dari penelitian ini adalah mengetahui hasil dari pengembangan dan implementasi model prediksi detak jantung berbasis LSTM, serta mengetahui hasil pengujian dan evaluasi model prediksi detak jantung berbasis LSTM pada beberapa perangkat. Hasil penelitian ini diharapkan dapat memberikan informasi yang berguna dalam pengembangan sistem pemantauan detak jantung berbasis LSTM.
+Manfaat dari penelitian ini adalah mengetahui performa model prediksi detak jantung berbasis LSTM pada beberapa perangkat tepi, baik dari segi akurasi, presisi, \emph{recall}, dan \emph{F1-score} serta hasil evaluasi inferensi model klasifikasi detak jantung berbasis LSTM pada perangkat tepi.
+Hasil penelitian ini diharapkan dapat memberikan informasi yang berguna dalam pengembangan sistem pemantauan detak jantung.
+
+
+\section{Batasan Masalah}
+
+Pada penelitian ini terdapat batasan masalah yang bertujuan untuk memfokuskan penelitian ini. Batasan masalah penelitian ini adalah sebagai berikut:
+\begin{enumerate}
+  \item Prediksi yang dilakukan pada penelitian terbatas pada lima kelas sesuai rekomendasi AAMI (Association for the Advancement of Medical Instrumentation).
+  \item Pengujian yang dilakukan menggunakan data detak jantung yang telah diperoleh sebelumnya menggunakan sensor ECG Polar H10.
+  \item Perangkat tepi yang digunakan untuk implementasi model prediksi detak jantung berbasis LSTM adalah Raspberry Pi 4 Model B dan Intel NUC.
+  \item Deteksi detak jantung dilakukan secara \textit{batch}.
+    % , bukan secara \textit{real-time}.
+\end{enumerate}
+
+
+
+
+\section{Sistematika Pembahasan}
+
+Penulisan laporan penelitian ini terdiri dari enam bab yang disusun secara sistematis sebagai berikut:
+
+\noindent
+\textbf{BAB I : PENDAHULUAN}
+
+% Pada bab ini dijelaskan latar belakang, rumusan masalah, batasan,
+% tujuan, manfaat,  dan sistematika penulisan.\\
+Bab ini menjelaskan latar belakang masalah yang menjadi dasar penelitian, rumusan masalah, tujuan penelitian, manfaat penelitian, batasan masalah, dan sistematika penulisan.\\
+
+\noindent
+% \textbf{BAB II : TINJAUAN PUSTAKA DAN LANDASAN TEORI}
+\textbf{BAB II : LANDASAN KEPUSTAKAAN}
+
+% Pada bab ini dijelaskan teori-teori dan penelitian terdahulu yang
+% digunakan sebagai acuan dan dasar dalam penelitian.\\
+Bab ini berisi tinjauan pustaka dan landasan teori yang digunakan sebagai acuan dan dasar dalam penelitian. Tinjauan pustaka mencakup penelitian-penelitian terdahulu yang dijadikan referensi dalam penelitian ini. Landasan teori berisi teori-teori terkait implementasi model prediksi detak jantung yang digunakan dalam penelitian ini.\\
+
+\noindent
+\textbf{BAB III : METODOLOGI PENELITIAN}
+
+% Pada bab ini dijelaskan metode yang digunakan dalam penelitian
+% meliputi langkah kerja, pertanyaan penelitian, alat dan bahan, serta
+% tahapan dan alur penelitian.\\
+Bab ini menjelaskan metode yang akan digunakan dalam penelitian, meliputi studi literatur, perancangan model, implementasi dan pengujian model, serta pembahasan hasil.\\
+
+\noindent
+\textbf{BAB IV : PERANCANGAN SISTEM}
+
+% Pada bab ini dijelaskan tentang pembuatan model prediksi detak jantung berbasis LSTM.\\
+Bab ini menguraikan langkah-langkah pembuatan model prediksi detak jantung berbasis LSTM, termasuk \textit{preprocessing} data, ekstraksi fitur, pelatihan model, dan evaluasi model.\\
+
+\noindent
+\textbf{BAB V : IMPLEMENTASI DAN PENGUJIAN}
+
+% Pada bab ini dijelaskan tentang implementasi model prediksi detak jantung berbasis LSTM pada beberapa perangkat dan pengujian performa inferensi model.\\
+Bab ini menjelaskan bagaimana model klasifikasi detak jantung berbasis LSTM diimplementasikan pada perangkat tepi dan bagaimana performa inferensi model diuji pada perangkat tersebut.\\
+
+\noindent
+\textbf{BAB VI : HASIL DAN PEMBAHASAN}
+
+Bab ini berisi hasil dari penelitian yang telah dilakukan, baik hasil evaluasi akurasi, presisi, \emph{recall}, dan \emph{F1-score} model klasifikasi detak jantung berbasis LSTM, maupun hasil evaluasi inferensi model klasifikasi detak jantung berbasis LSTM pada perangkat tepi.
+Pada bab ini juga dilakukan pembahasan terhadap hasil penelitian yang telah diperoleh.\\
+
+\noindent
+\textbf{BAB VII : PENUTUP}
+
+% Pada bab ini ditulis kesimpulan akhir dari penelitian dan saran untuk
+% pengembangan penelitian selanjutnya.\\
+Bab ini menyajikan kesimpulan akhir dari penelitian yang telah dilakukan, yang
+menjawab rumusan masalah yang telah diajukan pada Bab I. 
+Pada bab ini juga diberikan saran yang dapat dilakukan untuk pengembangan penelitian selanjutnya.\\
+

@@ -81,7 +81,7 @@
 \renewcommand \thesection {\@arabic\c@chapter.\@arabic\c@section}
 %% subsection in each chapter
 \renewcommand\thesubsection {\@arabic\c@chapter.\@arabic\c@section.\@arabic\c@subsection}
-
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 %% Redefine chapter e.g chapter 1
 \renewcommand{\@makechapterhead}[1]{%
   { % put chapter at center
@@ -137,7 +137,8 @@
 % Redefine caption names
 % ------------------------------------------------------------
 \def\captionsbahasa{%
-  \def\prefacename{KATA PENGANTAR}%
+  % \def\prefacename{KATA PENGANTAR}%
+  \def\prefacename{PRAKATA}%
   \def\contentsname{DAFTAR ISI}%
   \def\listtablename{DAFTAR TABEL}%
   \def\listfigurename{DAFTAR GAMBAR}%
@@ -176,6 +177,9 @@
 % ------------------------------------------------------------
 \newcommand{\titleskripsi}[1]{\gdef\@titleskripsi{#1}}
 \newcommand{\@titleskripsi}{}
+%titleskripsienglish
+\newcommand{\titleskripsienglish}[1]{\gdef\@titleskripsienglish{#1}}
+\newcommand{\@titleskripsienglish}{}
 \newcommand{\fullname}[1]{\gdef\@fullname{#1}}
 \newcommand{\@fullname}{}
 \newcommand{\idnum}[1]{\gdef\@idnum{#1}}
@@ -290,7 +294,7 @@
 
     \begin{singlespace}
       Skripsi ini telah diuji dan dinyatakan lulus pada: \\
-      2 Juli 2019 \\
+      17 Juli 2024 \\
       Telah diperiksa dan disetujui oleh: \\
       \vspace{1cm}
       \hbox to \hsize{
@@ -387,7 +391,7 @@
   \begin{singlespace}
     \chapter*{ABSTRACT}%
     \noindent
-    \textbf{\@fullname, \@titleskripsi}\\
+    \textbf{\@fullname, \@titleskripsienglish}\\
 
     \noindent
     \textbf{Supervisors: \@firstsupervisor\ and \@secondsupervisor}\\
